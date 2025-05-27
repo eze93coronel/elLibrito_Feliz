@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1748375576 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\main.cpp
+	<iostream>
+	"Socio.h"
+	"menuLibreria.h"
+	"socioManager.h"
+
+1748373221 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.cpp
+	<iostream>
+	"Socio.h"
+	<string>
+
+1748373238 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.h
+
+1748377112 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
+	<iostream>
+	"socioManager.h"
+	"Socio.h"
+	"sociosArchivos.h"
+
+1748375423 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.h
+
+1748375491 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
+	<iostream>
+	"menuLibreria.h"
+	"socioManager.h"
+
+1748374188 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibreria.h
+
+1748376845 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
+	<iostream>
+	"sociosArchivos.h"
+
+1748376845 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociosarchivos.h
+	"Socio.h"
+	<string>
+
