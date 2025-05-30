@@ -5,7 +5,7 @@
 using namespace std ;
 
 void socioManager::cargarSocio()
-{
+{   Fecha fecha;
     Socio socio;
     sociosArchivos socioArchivo;
     int numeroSocio;
@@ -30,9 +30,12 @@ cout <<"===============================" << endl;
     cout << "== EMAIL ==" << endl;
 
     getline(cin,email);
-cout <<"===============================" << endl;
 
-  socio = Socio(numeroSocio,nombre,apellido,dni,telefono,direccion,email);
+    fecha.cargarFecha();
+    fecha.mostrarFecha();
+cout <<"===============================" << endl;
+                     //int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string email
+  socio = Socio(numeroSocio,nombre,apellido,dni,telefono,direccion,email,fecha);
    cout << socio.mostrarSocioPantalla() << endl;
 
    if(socioArchivo.guardarArchivoSocio(socio)) {

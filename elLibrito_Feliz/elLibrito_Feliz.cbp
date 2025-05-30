@@ -32,7 +32,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="Socio.cpp" />
+		<Unit filename="Socio.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="menuLibreria.cpp" />
+		<Unit filename="menuLibreria.h" />
+		<Unit filename="socioManager.cpp" />
+		<Unit filename="socioManager.h" />
+		<Unit filename="sociosArchivos.cpp" />
+		<Unit filename="sociosArchivos.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

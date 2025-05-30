@@ -1,18 +1,19 @@
 # depslib dependency file v1.0
-1748375576 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\main.cpp
+1748562973 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\main.cpp
 	<iostream>
 	"Socio.h"
 	"menuLibreria.h"
 	"socioManager.h"
 
-1748373221 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.cpp
+1748571368 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.cpp
 	<iostream>
 	"Socio.h"
 	<string>
 
-1748373238 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.h
+1748555659 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.h
+	"Fecha.h"
 
-1748377112 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
+1748555662 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
 	<iostream>
 	"socioManager.h"
 	"Socio.h"
@@ -34,4 +35,10 @@
 1748376845 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociosarchivos.h
 	"Socio.h"
 	<string>
+
+1748573522 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1748485441 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\fecha.h
 

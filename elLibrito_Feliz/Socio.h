@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Fecha.h"
 class Socio
 {
 private :
@@ -13,10 +13,10 @@ private :
     std::string _direccion ;
 
     std::string _email ;
-
+    Fecha fecha;
 public :
     Socio();
-    Socio(int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string email)  ;
+    Socio(int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string , Fecha fecha);
 
     void setNumeroSocio(int numeroSocio);
     void setNombre(std::string nombre);
