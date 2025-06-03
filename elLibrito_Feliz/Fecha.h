@@ -16,5 +16,6 @@ int getAnio() ;
  void cargarFecha();
  void  mostrarFecha();
 
+ std::string toString();
 
 };

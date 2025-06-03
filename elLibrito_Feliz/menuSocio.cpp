@@ -12,8 +12,8 @@ void menuLibreria::mostrarMenuPrincipal(){
     cout << " SUB MENU SOCIO  " << endl;
     cout << "1. Cargar Socio  " << endl;
     cout << "2. Modificar socio "  << endl;
-    cout << "3. Consultar socio "  << endl;
-    cout << "4. Registrar pago  "  << endl;
+    cout << "3. Registrar pago "  << endl;
+    cout << "4. Consultar socio"  << endl;
     cout << "5. salir "  << endl;
 
     cout << "---------------------------------------" << endl;
@@ -28,12 +28,6 @@ void menuLibreria::mostrarMenuPrincipal(){
        case 2 :
           socioManager.listarSocios();
        break;
-       case 3 :
-            socioManager.buscarSocio();
-        break;
-       case 4 :
-
-        break;
     }
   }while(opcion!=5);
 

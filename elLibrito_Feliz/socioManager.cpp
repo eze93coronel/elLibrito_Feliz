@@ -10,6 +10,7 @@ void socioManager::cargarSocio()
     sociosArchivos socioArchivo;
     int numeroSocio;
     string nombre,apellido,dni,telefono,direccion,email;
+     //   Fecha fecha;
 cout <<"===============================" << endl;
     cout <<"INGRESE DATOS DEL SOCIO : " << endl;
     cout << "== NUMERO DEL SOCIO  ==" << endl;
@@ -46,4 +47,43 @@ cout <<"===============================" << endl;
             cout << " ===  ERROR, NO SE PUDO GUARDAR  EL ARCHIVO DEL SOCIO  === " << endl;
 
    }
+}
+void socioManager::cargarCantidadRegistroSocio(){
+    sociosArchivos archivoSocio;
+
+    int cantidadDeRegistros = archivoSocio.getCantidadRegistroSocio();
+
+    cout << "la cantidad de registros que tiene el archivo son : " << cantidadDeRegistros << endl;
+}
+void socioManager::listarSocios(){
+   sociosArchivos archivoSocio;
+   Socio socio;
+
+   int totalRegistrosSocio = archivoSocio.getCantidadRegistroSocio();
+
+   for (int i = 0; i<totalRegistrosSocio; i++){
+      socio = archivoSocio.LeerSocio(i);
+
+       cout << socio.mostrarSocioPantalla() << endl;
+
+   }
+
+}
+
+
+void socioManager::buscarSocio(){
+    sociosArchivos archivoSocio;
+    Socio socio;
+       int numeroSocio;
+     int posicionSocioArchivo = 0;
+     cout << "ingrese un numero de socio : " ;
+      cin >>  numeroSocio;
+    posicionSocioArchivo = archivoSocio.buscarArchivoSocio(numeroSocio);
+    if(posicionSocioArchivo >= 0) {
+        //socio = archivoSocio.LeerSocio(posicionSocioArchivo);
+        socio.mostrarSocioPantalla();
+    }
+    else {
+        cout << "no existe asociado con ese numero de socio .........." << endl;
+    }
 }

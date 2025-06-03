@@ -1,18 +1,17 @@
 #include <iostream>
 #include "Socio.h"
 #include <string>
+#include <cstring>
 using namespace std;
 Socio::Socio(){
      _numeroSocio = 0;
-     _nombre = " ";
-     _apellido = " ";
-     _dni = "";
+    strcpy( _nombre ," ");
+    strcpy( _apellido," ");
+    strcpy( _dni," ");
+    strcpy( _telefono," ");
+    strcpy( _direccion," ");
+    strcpy( _email," ");
 
-
-     _telefono = "";
-
-    _direccion  = "";
-     _email = "";
      Fecha fecha;
 }
 
@@ -32,8 +31,7 @@ void Socio::setNumeroSocio(int numeroSocio){
         cout << " == EL NUMERO DE SOCIO NO PUEDE SER MENOR QUE 0 == "  << endl;
           return;
    }
-
-       this -> _numeroSocio = numeroSocio;
+   this -> _numeroSocio = numeroSocio;
 }
 
 void Socio::setNombre(std::string nombre){
@@ -52,7 +50,7 @@ void Socio::setNombre(std::string nombre){
         }
     }
     // Asignar el nombre válido
-    this->_nombre = nombre;
+   strcpy(this -> _nombre,nombre.c_str());
 }
 
 
@@ -66,14 +64,14 @@ void Socio::setNombre(std::string nombre){
                   return;
            }
      }
-     this -> _apellido = apellido;
+      strcpy ( this -> _apellido,apellido.c_str()) ;
  }
   void Socio::setDni(std::string dni) {
      if(dni.empty()) {
         cout << "Error: El número de Dni no puede estar vacío " << endl;
         return;
      }
-      this -> _dni = dni;
+        strcpy ( this -> _dni,dni.c_str()) ;
  }
  void Socio::setTelefono(std::string telefono) {
     if (telefono.empty()) {
@@ -95,7 +93,7 @@ void Socio::setNombre(std::string nombre){
         return;
     }
 
-    this->_telefono = telefono;
+         strcpy ( this -> _telefono,telefono.c_str()) ;
  }
 
 
@@ -115,7 +113,7 @@ void Socio::setDireccion(std::string direccion) {
         }
     }
 
-    this->_direccion = direccion;
+        strcpy ( this -> _direccion,direccion.c_str()) ;
 }
 
 
@@ -144,7 +142,7 @@ void Socio::setEmail(std::string email) {
         return;
     }
 
-    this->_email = email;
+       strcpy ( this -> _email,email.c_str()) ;
 }
 
 

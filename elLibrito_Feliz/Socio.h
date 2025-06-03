@@ -4,19 +4,18 @@ class Socio
 {
 private :
     int _numeroSocio ;
-    std::string _nombre;
-    std::string _apellido;
-    std::string _dni;
+    char _nombre[50];
+    char _apellido[50];
+    char _dni[50];
+    char _telefono[50];
 
-    std::string _telefono;
+    char _direccion[50] ;
 
-    std::string _direccion ;
-
-    std::string _email ;
+    char _email[50] ;
     Fecha fecha;
 public :
     Socio();
-    Socio(int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string , Fecha fecha);
+    Socio(int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string, Fecha fecha);
 
     void setNumeroSocio(int numeroSocio);
     void setNombre(std::string nombre);

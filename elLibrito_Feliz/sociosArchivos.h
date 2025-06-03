@@ -10,6 +10,8 @@ class sociosArchivos {
     sociosArchivos();
     sociosArchivos(std:: string nombreArchivoSocio);
     bool guardarArchivoSocio( Socio registroSocio);
-
-
+    int getCantidadRegistroSocio();
+    Socio LeerSocio(int posicion);
+    int modificarSocio(Socio registroSocio, int pos);
+    int buscarArchivoSocio(int numeroSocio);
 };

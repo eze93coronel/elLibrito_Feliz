@@ -60,3 +60,9 @@ void Fecha::cargarFecha() {
 void Fecha::mostrarFecha(){
   cout <<_dia <<"/" <<_mes <<"/"<<_anio << endl;
 }
+
+
+
+/*std::string Fecha::toString() {
+        return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio) ;
+    } */
