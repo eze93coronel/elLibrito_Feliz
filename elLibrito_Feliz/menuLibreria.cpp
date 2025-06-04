@@ -10,11 +10,12 @@ void menuLibreria::mostrarMenuPrincipal(){
     cout << "---------------------------------------" << endl;
 
     cout << " SUB MENU SOCIO  " << endl;
-    cout << "1. Cargar Socio  " << endl;
-    cout << "2. Modificar socio "  << endl;
-    cout << "3. Consultar socio "  << endl;
-    cout << "4. Registrar pago  "  << endl;
-    cout << "5. salir "  << endl;
+    cout << "1. Alta Socio  " << endl;
+    cout << "2. Listar Socios "  << endl;
+    cout << "3. Consultar cantidad de registros  "  << endl;
+    cout << "4. Consultar Socio "  << endl;
+    cout << "5. Modificar Socio  "  << endl;
+    cout << "6. salir "  << endl;
 
     cout << "---------------------------------------" << endl;
 
@@ -29,13 +30,16 @@ void menuLibreria::mostrarMenuPrincipal(){
           socioManager.listarSocios();
        break;
        case 3 :
-            socioManager.buscarSocio();
+            socioManager.cargarCantidadRegistroSocio();
         break;
        case 4 :
-
+            socioManager.buscarSocio();
+        break;
+       case 5:
+           socioManager.modificarSocio();
         break;
     }
-  }while(opcion!=5);
+  }while(opcion!=6);
 
 
 }

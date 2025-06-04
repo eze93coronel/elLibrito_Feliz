@@ -57,13 +57,13 @@ bool sociosArchivos::guardarArchivoSocio(Socio registroSocio) {
 
     // Verificar la cantidad de registros
    // fseek(punteroArchivoSocio, 0, SEEK_END);
-    int cantidadRegistros = ftell(punteroArchivoSocio) / sizeof(Socio);
+    //int cantidadRegistros = ftell(punteroArchivoSocio) / sizeof(Socio);
 
-    if (pos < 0 || pos >= cantidadRegistros) {
+   /* if (pos < 0 || pos >= cantidadRegistros) {
         cout << "Error: Posición fuera de rango." << endl;
         fclose(punteroArchivoSocio);
         return registroSocio;  // Devuelve un objeto vacío
-    }
+    } */
 
     // Posicionar el puntero y leer el registro
     fseek(punteroArchivoSocio, sizeof(Socio) * pos, SEEK_SET);
@@ -80,13 +80,13 @@ int sociosArchivos::buscarArchivoSocio(int numeroSocio) {
     punteroArchivosSocio = fopen(_nombreArchivoSocio.c_str(), "rb");
     if (punteroArchivosSocio == nullptr) {
         cout << "Error: No se pudo abrir el archivo de socios." << endl;
-        return -2;
+        return -1;
     }
 
     int posicion = 0;
     while (fread(&objSocio, sizeof(Socio), 1, punteroArchivosSocio) == 1) {
         if (objSocio.getNumeroSocio() == numeroSocio) {  // Corrección aquí
-            //fclose(punteroArchivosSocio);
+            fclose(punteroArchivosSocio);
             return posicion;
         }
         posicion++;
@@ -103,6 +103,7 @@ int sociosArchivos::modificarSocio(Socio registroSocio, int pos)  {
   punteroARchivoSocio = fopen(_nombreArchivoSocio.c_str(),"rb+");
 
   if(punteroARchivoSocio == nullptr){
+         cout << "Error: No se pudo abrir el archivo de socios." << endl;
       return -1;
   }
    fseek(punteroARchivoSocio, sizeof(Socio) * pos, SEEK_SET);

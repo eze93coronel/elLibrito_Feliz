@@ -36,9 +36,13 @@
 		<Unit filename="Fecha.h" />
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
+		<Unit filename="libro.cpp" />
+		<Unit filename="libro.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menuLibreria.cpp" />
 		<Unit filename="menuLibreria.h" />
+		<Unit filename="menuLibro.cpp" />
+		<Unit filename="menuLibro.h" />
 		<Unit filename="socioManager.cpp" />
 		<Unit filename="socioManager.h" />
 		<Unit filename="sociosArchivos.cpp" />

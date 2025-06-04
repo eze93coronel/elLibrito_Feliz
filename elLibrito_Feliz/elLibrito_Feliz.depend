@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1748818904 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\main.cpp
+1749005074 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\main.cpp
 	<iostream>
 	"Socio.h"
 	"menuLibreria.h"
 	"socioManager.h"
+	"menuLibro.h"
 
 1748798826 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.cpp
 	<iostream>
@@ -14,22 +15,23 @@
 1748798348 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\socio.h
 	"Fecha.h"
 
-1748918061 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
+1748988937 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
 	<iostream>
 	"socioManager.h"
 	"Socio.h"
 	"sociosArchivos.h"
+	"Fecha.h"
 
 1748906458 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociomanager.h
 
-1748906458 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
+1749002172 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
 	<iostream>
 	"menuLibreria.h"
 	"socioManager.h"
 
 1748821418 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibreria.h
 
-1748918511 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
+1748988007 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
 	<iostream>
 	<cstring>
 	"sociosArchivos.h"
@@ -43,4 +45,10 @@
 	"Fecha.h"
 
 1748798784 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\fecha.h
+
+1749005109 source:c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
+	<iostream>
+	"menuLibro.h"
+
+1749004932 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\menulibro.h
 
