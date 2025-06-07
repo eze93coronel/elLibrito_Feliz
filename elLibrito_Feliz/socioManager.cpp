@@ -37,7 +37,7 @@ void socioManager::cargarSocio()
     fecha.cargarFecha();
     fecha.mostrarFecha();
     cout <<"===============================" << endl;
-    //int numeroSocio,   std::string nombre,std::string apellido,std::string dni,std::string telefono,std::string direccion,std::string email
+
     socio = Socio(numeroSocio,nombre,apellido,dni,telefono,direccion,email,fecha);
     cout << socio.mostrarSocioPantalla() << endl;
 
@@ -78,6 +78,9 @@ void socioManager::listarSocios()
         cout << " DNI : " << socio.getDni()<< endl;
         cout << " DIRECCION : " << socio.getDireccion()<< endl;
         cout << " EMAIL : " << socio.getEmail() << endl;
+        cout << " FECHA : " ;
+         socio.getFecha(); cout << endl;
+
         cout << "=============================================" << endl;
     }
 
@@ -95,8 +98,8 @@ void socioManager::buscarSocio()
 
     if (posicionSocioArchivo >= 0)
     {
-        // Aquí deberías leer el socio correcto desde el archivo
-        socio = archivoSocio.LeerSocio(posicionSocioArchivo); // Asumiendo que esta función existe
+
+        socio = archivoSocio.LeerSocio(posicionSocioArchivo);
 
         cout << " == LOS DATOS DEL SOCIO SON  == " << endl;
         cout << "============================================"  << endl;
@@ -116,18 +119,18 @@ void socioManager::modificarSocio() {
     Socio socio;
     int numeroSocio;
 
-    // Pedir número de socio a modificar
+
     cout << "INGRESE UN NUMERO DE SOCIO QUE QUIERA MODIFICAR : ";
     cin >> numeroSocio;
 
-    // Buscar el socio en el archivo
+
     int posicion = archivoSocio.buscarArchivoSocio(numeroSocio);
     if (posicion == -1) {
         cout << "NO EXISTE ASOCIADO CON ESE NUMERO DE SOCIO ." << endl;
         return;
     }
 
-    // Leer el socio desde el archivo
+
     socio = archivoSocio.LeerSocio(posicion);
 
     // Mostrar datos actuales del socio
@@ -158,7 +161,7 @@ void socioManager::modificarSocio() {
 
     getline(cin,email);
 
-    // Modificar los datos del socio
+
     socio.setNumeroSocio(numeroSocio);
     socio.setNombre(nombre);
     socio.setApellido(apellido);
@@ -167,7 +170,7 @@ void socioManager::modificarSocio() {
     socio.setEmail(email);
     //socio.setFechaNacimiento(fechaNacimiento);
 
-    // Guardar la modificación en el archivo
+
     int resultado = archivoSocio.modificarSocio(socio, posicion);
     if (resultado > 0) {
         cout << "SOCIO MODIFICADO CORRECTAMENTE ." << endl;

@@ -3,7 +3,7 @@
 class libro
 {
 private :
-    char _isbn[30];
+    char  _isbn[30];
     char _titulo[50];
     int Id_autor;
     int cantidadEjemplares;
@@ -11,7 +11,7 @@ private :
 
 public :
     libro();
-    libro(std::string  isbn,std::string titulo,int IdAutor,int cantidadEjemplares,fechaPublicacion);
+    libro(std::string isbn,std::string titulo,int IdAutor,int cantidadEjemplares,Fecha fechaPublicacion);
 
     void setIsbn(std::string isbn);
     void setTitulo(std::string titulo);

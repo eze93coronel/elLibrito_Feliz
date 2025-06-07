@@ -24,7 +24,7 @@ public :
     void setTelefono(std::string telefono);
     void setDireccion (std::string direccion);
     void setEmail(std::string email);
-
+    void setFecha(Fecha fecha);
     int getNumeroSocio();
     std::string getNombre();
     std::string getApellido();
@@ -32,7 +32,7 @@ public :
     std::string getTelefono();
     std::string getDireccion();
     std::string getEmail();
-
+    void  getFecha();
     std::string mostrarSocioPantalla();
 
 };

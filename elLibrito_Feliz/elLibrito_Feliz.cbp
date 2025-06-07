@@ -38,6 +38,8 @@
 		<Unit filename="Socio.h" />
 		<Unit filename="libro.cpp" />
 		<Unit filename="libro.h" />
+		<Unit filename="libroArchivo.cpp" />
+		<Unit filename="libroArchivo.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menuLibreria.cpp" />
 		<Unit filename="menuLibreria.h" />
