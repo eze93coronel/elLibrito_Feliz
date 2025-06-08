@@ -68,3 +68,97 @@
 1749163670 c:\users\usuario\onedrive\escritorio\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
 	"libro.h"
 
+1749322358 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1749308721 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\fecha.h
+
+1749392776 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\libro.cpp
+	<iostream>
+	<string>
+	<cstring>
+	"libro.h"
+
+1749387838 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\libro.h
+	"Fecha.h"
+
+1749424379 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\libroarchivo.cpp
+	<limits>
+	<iostream>
+	<cstdio>
+	<iomanip>
+	"libroArchivo.h"
+	"libro.h"
+	"funcionesAuxiliares.h"
+	<regex>
+	<vector>
+	<algorithm>
+
+1749423390 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\libroarchivo.h
+	<string>
+	"libro.h"
+
+1749421959 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\main.cpp
+	<iostream>
+	"Socio.h"
+	"menuLibreria.h"
+	"socioManager.h"
+	"menuLibro.h"
+	"libroArchivo.h"
+
+1749308814 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\socio.h
+	"Fecha.h"
+
+1749308721 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\menulibreria.h
+
+1749308721 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\sociomanager.h
+
+1749308721 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\menulibro.h
+
+1749308721 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\menulibreria.cpp
+	<iostream>
+	"menuLibreria.h"
+	"socioManager.h"
+
+1749422889 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\menulibro.cpp
+	<iostream>
+	"menuLibro.h"
+	"libroArchivo.h"
+
+1749308814 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\socio.cpp
+	<iostream>
+	"Socio.h"
+	<string>
+	<cstring>
+
+1749308815 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\sociomanager.cpp
+	<iostream>
+	"socioManager.h"
+	"Socio.h"
+	"sociosArchivos.h"
+	"Fecha.h"
+
+1749308721 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\sociosarchivos.h
+	"Socio.h"
+	<string>
+
+1749308721 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\sociosarchivos.cpp
+	<iostream>
+	<cstring>
+	"sociosArchivos.h"
+
+1749420685 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\funcionesauxiliares.cpp
+	<iostream>
+	<regex>
+	<algorithm>
+	<cctype>
+	<string>
+
+1749330164 c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\funcionesauxiliares.h
+
+1749423755 source:c:\users\alvar\documents\github\ellibrito_feliz2\ellibrito_feliz\autoresmanager.cpp
+	<cstdio>
+	<algorithm>
+	"libroArchivo.h"
+

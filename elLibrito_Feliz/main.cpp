@@ -3,10 +3,12 @@
 #include "menuLibreria.h"
 #include "socioManager.h"
 #include "menuLibro.h"
+#include "libroArchivo.h"
 using namespace std;
 
 int main()
 {
+
     menuLibreria menu;
     menuLibro menuLibro;
     int opc;
@@ -18,7 +20,7 @@ int main()
         cout << "3. MENU REPORTES " << endl;
         cout << "4. SALIR  " << endl;
         cout << "************************" << endl;
-        cout << "SELECCIONAR OPCION " << endl;
+        cout << "SELECCIONAR OPCION: ";
         cin>>opc;
         system("cls");
         switch(opc){
@@ -27,8 +29,15 @@ int main()
             case 2:
                    menuLibro.mostrarMenuLibro();
                     break;
-            case 0: return 0;
+            case 3:
                     break;
+            case 4:
+                std::cout << "==================================================" << std::endl;
+                std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
+                std::cout << "==================================================" << std::endl;
+                std::exit(0);
+                break;
+
             default: cout<<"LA SELECCION NO ES CORRECTA"<<endl;
 
         }

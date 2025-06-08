@@ -36,6 +36,11 @@
 		<Unit filename="Fecha.h" />
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
+		<Unit filename="autoresManager.cpp" />
+		<Unit filename="funcionesAuxiliares.cpp" />
+		<Unit filename="funcionesAuxiliares.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="libro.cpp" />
 		<Unit filename="libro.h" />
 		<Unit filename="libroArchivo.cpp" />

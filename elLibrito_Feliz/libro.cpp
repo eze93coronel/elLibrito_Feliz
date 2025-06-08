@@ -3,47 +3,49 @@
 #include <cstring>
 #include "libro.h"
 using namespace std ;
-libro::libro()
-{
-    strcpy(_isbn," ");
-    strcpy(_titulo," ");
+libro::libro() : fechaPublicacion() {
+    strcpy(_isbn, "");
+    strcpy(_titulo, "");
     Id_autor = 0;
     cantidadEjemplares = 0;
-    Fecha   fechaPublicacion;
-
+    librosPrestados = 0;
 }
 
-libro::libro(std::string isbn, std::string titulo, int IdAutor, int cantidadEjemplares,Fecha fechaPublicacion){
-  setIsbn(isbn);
-   setTitulo(titulo);
-  setIdAutor(IdAutor);
-  setCantidadEjemplares(cantidadEjemplares);
-
-
+libro::libro(std::string isbn, std::string titulo, int IdAutor, int cantidadEjemplares, int librosPrestados, Fecha fechaPublicacion): fechaPublicacion(fechaPublicacion){
+    setIsbn(isbn);
+    setTitulo(titulo);
+    setIdAutor(IdAutor);
+    setCantidadEjemplares(cantidadEjemplares);
+    setlibrosPrestados(librosPrestados);
 }
 
-void libro::setIsbn(std::string isbn){
-  if(isbn.empty()) {
 
-    std::cout << "el isbn del libro no puede estar vacio ✌️✌️ " <<  endl;
-    return;
+bool libro::setIsbn(std::string isbn) {
+    if (isbn.empty()) {
+        std::cout << "El ISBN del libro no puede estar vacio" << endl << std::endl;
+        return false;
+    }
+    else{
+        strcpy(this -> _isbn,isbn.c_str());
+        return true;
 
-  }
-  strcpy(this -> _isbn,isbn.c_str());
+    }
 }
 
-void libro::setTitulo(std:: string titulo){
- if(titulo.empty() ) {
+bool libro::setTitulo(std:: string titulo){
+    if(titulo.empty() ) {
+    std::cout << "el titulo del libro no puede estar vacio" << endl << std::endl;
+    return false;
+    }
+    else{
+        strcpy(this -> _titulo,titulo.c_str());
+        return true;
+    }
 
-    std::cout << "el titulo del libro no puede estar vacio ✌️✌️ " <<  endl;
-    return;
-
- }
-   strcpy(this -> _titulo,titulo.c_str());
 }
 
 void libro::setIdAutor(int IdAutor){
-   if(IdAutor <= 0  )
+   if(IdAutor <= 0)
     {
         cout << " == EL NUMERO DE AUTOR NO PUEDE SER MENOR QUE 0 == "  << endl;
         return;
@@ -58,6 +60,16 @@ void libro::setIdAutor(int IdAutor){
         return;
     }
     this -> cantidadEjemplares= cantidadEjemplares;
+}
+
+ void libro::setlibrosPrestados(int librosPrestados){
+     if(librosPrestados < 1   )
+    {
+            cout << "Aun no se han ingresado prestamos de este libro." << endl;
+        return;
+    }
+
+    this -> librosPrestados= librosPrestados;
 }
 
 
@@ -76,21 +88,28 @@ int libro::getIdAutor(){
 int libro::getCantidadEjemplares(){
       return cantidadEjemplares;
 }
+int libro::getlibrosPrestados(){
+      return librosPrestados;
+}
 
-std::string libro::mostrarLIbro(){
-
+///PREGUNTAR A EZE PARA QU� EST� ESTA FUNCION AC� SI TAMBI�N LA TENEMOS EN LIBROARCHIVO.
+std::string libro::mostrarLibro(){
 std::string str = "";
-
     str += std::string(_isbn) + ",";
     str += std::string ( _titulo) + ",";
     str +=std::to_string( Id_autor) + ",";
     str += std::to_string(cantidadEjemplares) + ",";
+    str += std::to_string(librosPrestados) + ",";
     fechaPublicacion.getDia();
     fechaPublicacion.getMes();
     fechaPublicacion.getAnio();
-
-
-
     return str;
+}
 
+void libro::setFechaPublicacion(const Fecha& f) {
+    fechaPublicacion = f;
+}
+
+Fecha libro::getFechaPublicacion() const {
+    return fechaPublicacion;
 }

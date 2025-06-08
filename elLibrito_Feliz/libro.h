@@ -1,33 +1,32 @@
 #pragma once
 #include "Fecha.h"
-class libro
-{
+class libro{
 private :
-    char  _isbn[30];
+    char  _isbn[14];
     char _titulo[50];
     int Id_autor;
     int cantidadEjemplares;
-    Fecha   fechaPublicacion;
+    int librosPrestados;
+    Fecha fechaPublicacion;
 
 public :
     libro();
-    libro(std::string isbn,std::string titulo,int IdAutor,int cantidadEjemplares,Fecha fechaPublicacion);
+    libro(std::string isbn,std::string titulo,int IdAutor,int cantidadEjemplares, int librosPrestados, Fecha fechaPublicacion);
 
-    void setIsbn(std::string isbn);
-    void setTitulo(std::string titulo);
+    bool setIsbn(std::string isbn);
+    bool setTitulo(std::string titulo);
     void setIdAutor(int IdAutor);
     void setCantidadEjemplares(int cantidadEjemplares);
-
+    void setlibrosPrestados(int librosPrestados);
 
     std::string getIsbn();
     std::string getTitulo();
     int getIdAutor();
     int getCantidadEjemplares();
+    int getlibrosPrestados();
 
-    std::string mostrarLIbro();
+    std::string mostrarLibro();
 
-
-
-
-
+    void setFechaPublicacion(const Fecha& f);
+    Fecha getFechaPublicacion() const;
 };

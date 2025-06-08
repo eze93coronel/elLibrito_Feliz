@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Fecha.h"
 using namespace std ;
+
 Fecha::Fecha() {
     _dia = 0;
     _mes = 0;
@@ -16,7 +17,7 @@ void Fecha::setDia(int dia) {
 }
 void Fecha::setMes(int mes) {
      if(mes <1 || mes > 12) {
-       std::cout << "Error : el mes de ser entre 0 y 12. " << std::endl;
+       std::cout << "Error : el mes de ser entre 1 y 12. " << std::endl;
        return;
   }
     this -> _mes = mes;
@@ -66,3 +67,5 @@ void Fecha::mostrarFecha(){
 /*std::string Fecha::toString() {
         return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio) ;
     } */
+
+
