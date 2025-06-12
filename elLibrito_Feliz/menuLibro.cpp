@@ -20,6 +20,7 @@ void menuLibro::mostrarMenuLibro() {
     cout << "6. Consultar stock "  << endl;
     cout << "7. Volver al menu anterior "  << endl;
     cout << "8. Salir "  << endl;
+    cout << "8. Salir "  << endl;
 
 
     cout << "---------------------------------------" << endl;
