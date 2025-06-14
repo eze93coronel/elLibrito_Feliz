@@ -36,7 +36,14 @@
 		<Unit filename="Fecha.h" />
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
+		<Unit filename="autores.cpp" />
+		<Unit filename="autores.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="autoresManager.cpp" />
+		<Unit filename="autoresManager.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="funcionesAuxiliares.cpp" />
 		<Unit filename="funcionesAuxiliares.h">
 			<Option target="&lt;{~None~}&gt;" />

@@ -1,10 +1,12 @@
 #include <iostream>
 #include "menuLibro.h"
 #include "libroArchivo.h"
+#include "autoresManager.h"
 
 using namespace std ;
 void menuLibro::mostrarMenuLibro() {
     libroArchivo aLibro;
+    autoresManager aAutores;
     int opcion ;
 
 
@@ -19,7 +21,6 @@ void menuLibro::mostrarMenuLibro() {
     cout << "5. Devolver libro "  << endl;
     cout << "6. Consultar stock "  << endl;
     cout << "7. Volver al menu anterior "  << endl;
-    cout << "8. Salir "  << endl;
     cout << "8. Salir "  << endl;
 
 
@@ -37,7 +38,7 @@ void menuLibro::mostrarMenuLibro() {
             std::cout << "===============================" << std::endl;
             std::cout << std::endl;
             cout << "Ingrese los datos del nuevo libro: " << endl << endl;
-            aLibro.cargarLibro();
+            aLibro.NuevoLibro();
             system("pause");
         break;
 
@@ -53,6 +54,8 @@ void menuLibro::mostrarMenuLibro() {
 
        case 3 :
            /*Aca va una función que te pregunte qué queres modificar y de qué libro. Se pueden modificar todos los datos menos la columna de "prestados"*/
+           aAutores.listarAutores();
+           system("pause");
         break;
 
        case 4 :
