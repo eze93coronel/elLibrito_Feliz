@@ -103,7 +103,7 @@ int autoresManager::seleccionarOcrearAutorPorNombre() {
     Autores coincidencias[100];  // Hasta 100 coincidencias permitidas
     int total = 0;
 
-    // Ingreso del nombre o parte del nombre con validación
+    // Ingreso del nombre o parte del nombre con validaciÃ³n
     do {
         std::cout << "== INGRESE NOMBRE DEL AUTOR (o parte del nombre) ==: ";
         std::getline(std::cin, nombreAutorInput);
@@ -130,9 +130,15 @@ int autoresManager::seleccionarOcrearAutorPorNombre() {
 
         int seleccion;
         do {
-            std::cout << "Seleccione una opción (1-" << total << ") o 0 para crear nuevo autor: ";
-            std::cin >> seleccion;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                if(total == 1){
+                    std::cout << "Seleccione la opciÃ³n 1 para seleccionar el autor o 0 para crear nuevo autor: ";
+                }
+                else{
+                    std::cout << "Seleccione una opciÃ³n entr3 1 y " << total << " para seleccionar el autor o 0 para crear nuevo autor: ";
+                }
+                std::cin >> seleccion;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
         } while (seleccion < 0 || seleccion > total);
 
         if (seleccion != 0) {
@@ -140,7 +146,7 @@ int autoresManager::seleccionarOcrearAutorPorNombre() {
         }
     }
 
-    // Crear nuevo autor si no hubo coincidencias o seleccionó 0
+    // Crear nuevo autor si no hubo coincidencias o seleccionÃ³ 0
     std::string nombreCompleto;
     do {
         std::cout << "No se encontraron coincidencias. Ingrese el nombre completo del nuevo autor: ";

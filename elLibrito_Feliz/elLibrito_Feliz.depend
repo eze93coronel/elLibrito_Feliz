@@ -172,7 +172,7 @@
 	"funcionesAuxiliares.h"
 	<iomanip>
 
-1749952332 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
+1749959287 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
 	<string>
 	"libro.h"
 	"autoresManager.h"
@@ -186,7 +186,7 @@
 	<iostream>
 	"Fecha.h"
 
-1749955415 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
+1749959325 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
 	<iostream>
 	<regex>
 	<algorithm>
@@ -202,7 +202,7 @@
 	<cstring>
 	"libro.h"
 
-1749954779 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.cpp
+1749961841 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.cpp
 	<limits>
 	<iostream>
 	<cstdio>
@@ -216,7 +216,7 @@
 	"autores.h"
 	"autoresManager.h"
 
-1749955026 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.h
+1749958386 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.h
 	<string>
 	<algorithm>
 	<cctype>
@@ -245,7 +245,7 @@
 	"menuLibreria.h"
 	"socioManager.h"
 
-1749931810 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
+1749959306 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
 	<iostream>
 	"menuLibro.h"
 	"libroArchivo.h"

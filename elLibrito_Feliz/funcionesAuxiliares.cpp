@@ -87,7 +87,7 @@ Fecha leerFechaValida() {
 
     // AÑO
     while (true) {
-        std::cout << "Ingrese ANIO (1-2030): ";
+        std::cout << "Ingrese AÑO (1-2030): ";
         if (std::cin >> anio && anio >= 1 && anio <= 2030) {
             break;
         }
@@ -98,7 +98,6 @@ Fecha leerFechaValida() {
 
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    // Validación final del día con el mes y año ya conocidos
     int maxDia = diasEnMes(mes, anio);
     if (dia > maxDia) {
         std::cout << "Error: el día " << dia << " no es válido para el mes " << mes << " y año " << anio << ".\n";
@@ -112,3 +111,22 @@ Fecha leerFechaValida() {
     return fecha;
 }
 
+int leerOpcionRango(int minimo, int maximo, const std::string& mensaje) {
+    int opcion;
+    do {
+        std::cout << mensaje;
+        if (!(std::cin >> opcion)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Debe ingresar un número válido.\n";
+            continue;
+        }
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if (opcion < minimo || opcion > maximo) {
+            std::cout << "Opción fuera de rango. Intente nuevamente.\n";
+        }
+    } while (opcion < minimo || opcion > maximo);
+
+    return opcion;
+}

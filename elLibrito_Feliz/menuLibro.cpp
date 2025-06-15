@@ -19,9 +19,8 @@ void menuLibro::mostrarMenuLibro() {
     cout << "3. Modificar libro "  << endl;
     cout << "4. Prestar libro "  << endl;
     cout << "5. Devolver libro "  << endl;
-    cout << "6. Consultar stock "  << endl;
-    cout << "7. Volver al menu anterior "  << endl;
-    cout << "8. Salir "  << endl;
+    cout << "6. Volver al menu anterior "  << endl;
+    cout << "7. Salir "  << endl;
 
 
     cout << "---------------------------------------" << endl;
@@ -53,8 +52,10 @@ void menuLibro::mostrarMenuLibro() {
        break;
 
        case 3 :
-           /*Aca va una función que te pregunte qué queres modificar y de qué libro. Se pueden modificar todos los datos menos la columna de "prestados"*/
-           aAutores.listarAutores();
+            std::cout << "===============================" << std::endl;
+            std::cout << "MODIFICAR LIBRO" << std::endl;
+            std::cout << "==============================="<< std::endl;
+           aLibro.modificarLibro();
            system("pause");
         break;
 
@@ -67,21 +68,18 @@ void menuLibro::mostrarMenuLibro() {
 
         break;
        case 5:
+            std::cout << "===============================" << std::endl;
+            std::cout << "DEVOLVER LIBRO" << std::endl;
+            std::cout << "==============================="<< std::endl;
+            ///aLibro.prestarLibro();
+            aLibro.devolverLibro();
+            system("pause");
         break;
 
        case 6:
-            std::cout << "===============================" << std::endl;
-            std::cout << "STOCK DE LIBROS" << std::endl;
-            std::cout << "==============================="<< std::endl;
-            aLibro.listarLibros();
-            cout << endl;
-            cout << "la cantidad de libros registrados es: " << aLibro.getCantidadRegistroLibro() << endl;
-            system("pause");
 
-        break;
-       case 7:
            return;
-       case 8:
+       case 7:
         std::cout << "==================================================" << std::endl;
         std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
         std::cout << "==================================================" << std::endl;

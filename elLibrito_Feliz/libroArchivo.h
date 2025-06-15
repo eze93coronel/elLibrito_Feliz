@@ -21,5 +21,7 @@ public:
     void mostrarEncabezadoTablaLibros();
     void mostrarLibroEnTabla(libro& l, autoresManager& manager);
     bool existeIsbn(const std::string& isbnBuscado, libro& libroEncontrado);
+    void modificarLibro();
+    void devolverLibro();
 
 };

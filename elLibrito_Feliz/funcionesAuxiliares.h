@@ -14,5 +14,7 @@ std::string trim(const std::string& str);
 Fecha leerFechaValida();
 bool esAnioBisiesto(int anio);
 int diasEnMes(int mes, int anio);
+int leerOpcionRango(int minimo, int maximo, const std::string& mensaje);
+
 
 #endif // FUNCIONESAUXILIARES_H_INCLUDED
