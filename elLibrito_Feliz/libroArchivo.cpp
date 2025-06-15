@@ -25,106 +25,85 @@ void libroArchivo::NuevoLibro() {
     libroArchivo archivo;
     libro l;
     autoresManager managerAutores;
-    Autores nuevoAutor;
 
-    std::string isbn, titulo, nombreAutorInput;
+    std::string isbn, titulo;
     int cantidad;
 
-    std::cout << "== ISBN ==: ";
-    std::getline(std::cin, isbn);
-    while (!l.setIsbn(isbn)) {
-        std::cout << "== INGRESE UN ISBN ==: ";
+    // === ISBN ===
+    libro libroExistente;
+    do {
+        std::cout << "== ISBN ==: ";
         std::getline(std::cin, isbn);
-    }
+        isbn = trim(isbn);
 
-    std::cout << "== TITULO (max 50 caracteres) ==: ";
-    std::getline(std::cin, titulo);
-    while (!l.setTitulo(titulo)) {
-        std::cout << "== INGRESE EL TITULO (max 50 caracteres) ==: ";
+        if (isbn.empty()) {
+            std::cout << "El ISBN no puede estar vacío.\n";
+            continue;
+        }
+
+        if (existeIsbn(isbn, libroExistente)) {
+            std::cout << "YA EXISTE UN LIBRO CON ESE ISBN.\n"
+                      << "Título: " << libroExistente.getTitulo() << "\n";
+            return;  // Cancelar carga
+        }
+
+        if (l.setIsbn(isbn)) break;
+
+        std::cout << "ISBN inválido. Intente nuevamente.\n";
+    } while (true);
+
+    // === Título ===
+    do {
+        std::cout << "== TITULO (max 50 caracteres) ==: ";
         std::getline(std::cin, titulo);
-    }
-
-    std::cout << "== INGRESE NOMBRE DEL AUTOR (o parte del nombre) ==: ";
-    std::getline(std::cin, nombreAutorInput);
-
-    std::vector<Autores> coincidencias;
-    FILE* archivoAutores = fopen("archivos/autores.dat", "rb");
-    Autores a;
-
-    if (archivoAutores != nullptr) {
-        while (fread(&a, sizeof(Autores), 1, archivoAutores) == 1) {
-            std::string autorNombre = a.getNombreAutor();
-            if (autorNombre.find(nombreAutorInput) != std::string::npos) {
-                coincidencias.push_back(a);
-            }
+        titulo = trim(titulo);
+        if (titulo.empty()) {
+            std::cout << "El título no puede estar vacío.\n";
+            continue;
         }
-        fclose(archivoAutores);
-    }
+        if (l.setTitulo(titulo)) break;
 
-    int id_Autor = 0;
-    if (!coincidencias.empty()) {
-        std::cout << "=== COINCIDENCIAS ENCONTRADAS ===" << std::endl;
-        for (size_t i = 0; i < coincidencias.size(); ++i) {
-            std::cout << "[" << i + 1 << "] " << coincidencias[i].getNombreAutor()
-                      << " (ID: " << coincidencias[i].getIdAutor() << ")" << std::endl;
-        }
+        std::cout << "Título inválido o demasiado largo.\n";
+    } while (true);
 
-        int seleccion;
-        do {
-            std::cout << "Seleccione una opción (1-" << coincidencias.size() << ") o 0 para crear nuevo autor: ";
-            std::cin >> seleccion;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        } while (seleccion < 0 || seleccion > static_cast<int>(coincidencias.size()));
-
-        if (seleccion != 0) {
-            id_Autor = coincidencias[seleccion - 1].getIdAutor();
-        }
-    }
-
+    // === Autor ===
+    int id_Autor = managerAutores.seleccionarOcrearAutorPorNombre();
     if (id_Autor == 0) {
-        std::string nombreCompleto;
-        std::cout << "No se encontraron coincidencias. Ingrese el nombre completo del nuevo autor: ";
-        std::getline(std::cin, nombreCompleto);
-
-        autoresManager managerAutores;
-        int nuevoId = managerAutores.obtenerSiguienteIdAutor();
-        nuevoAutor.setIdAutor(nuevoId);
-        nuevoAutor.setNombreAutor(nombreCompleto);
-
-        FILE* fa = fopen("archivos/autores.dat", "ab");
-        if (fa != nullptr) {
-            fwrite(&nuevoAutor, sizeof(Autores), 1, fa);
-            fclose(fa);
-            std::cout << "Nuevo autor guardado con ID: " << nuevoId << std::endl;
-        } else {
-            std::cout << "Error al guardar nuevo autor." << std::endl;
-        }
-
-        id_Autor = nuevoId;
+        std::cout << "Error al seleccionar o crear el autor. Cancelando.\n";
+        return;
     }
-
     l.setIdAutor(id_Autor);
 
     // === Cantidad de ejemplares ===
-    std::cout << "== CANTIDAD DE EJEMPLARES ==: ";
-    std::cin >> cantidad;
-    l.setCantidadEjemplares(cantidad);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    do {
+        std::cout << "== CANTIDAD DE EJEMPLARES ==: ";
+        if (!(std::cin >> cantidad)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Debe ingresar un numero.\n";
+            continue;
+        }
+        if (cantidad > 0) {
+            l.setCantidadEjemplares(cantidad);
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            break;
+        }
+        std::cout << "La cantidad debe ser mayor a cero.\n";
+    } while (true);
 
     // === Fecha ===
     std::cout << "== FECHA DE PUBLICACION ==" << std::endl;
-    Fecha fecha;
-    fecha.cargarFecha();
+    Fecha fecha = leerFechaValida();
     l.setFechaPublicacion(fecha);
-
     std::cout << "===============================" << std::endl;
 
     if (archivo.guardarLibro(l)) {
-        std::cout << "=== EL LIBRO FUE GUARDADO CORRECTAMENTE ===" << std::endl;
+        std::cout << "EL LIBRO FUE GUARDADO CORRECTAMENTE" << std::endl;
     } else {
-        std::cout << "=== ERROR, NO SE PUDO GUARDAR EL LIBRO ===" << std::endl;
+        std::cout << "ERROR: NO SE PUDO GUARDAR EL LIBRO" << std::endl;
     }
 }
+
 
 ///2.  ESTA FUNCION SIRVE PARA MOSTRAR EL LIBRO EN LA POSICIÓN SELECCIONADA, A FUTURO DEBERÍA CAMBIARSE PARA QUE EN VEZ DE TOMAR LA POSICIÓN TOME EL TÍTULO, EL ISBN O EL AUTOR.
 void libroArchivo::buscarLibro() {
@@ -362,7 +341,6 @@ bool libroArchivo::elegirCriterioBusqueda(int& opc, std::string& criterio) {
     } while (true);
 }
 
-
 // Lee un libro de la posición indicada
 libro libroArchivo::LeerLibro(int pos) {
     libro l;
@@ -376,7 +354,7 @@ void libroArchivo::mostrarEncabezadoTablaLibros() {
     system("cls");
     std::cout << left
          << std::setw(15) << "ISBN"
-         << std::setw(40) << "Titulo"
+         << std::setw(50) << "Titulo"
          << std::setw(30) << "Autor"
          << std::setw(18) << "F. Publicacion"
          << std::setw(15) << "Stock actual"
@@ -391,11 +369,27 @@ void libroArchivo::mostrarLibroEnTabla(libro& l, autoresManager& manager) {
     std::string fechaStr = to_string(f.getDia()) + "/" + to_string(f.getMes()) + "/" + to_string(f.getAnio());
     std::cout << left
          << std::setw(15) << l.getIsbn()
-         << std::setw(40) << l.getTitulo().substr(0, 50)
+         << std::setw(50) << l.getTitulo().substr(0, 50)
          << std::setw(30) << manager.buscarNombrePorId(l.getIdAutor())
          << std::setw(22) << fechaStr
          << std::setw(15) << (l.getCantidadEjemplares() - l.getlibrosPrestados())
          << setw(15) << l.getlibrosPrestados()
          << std::setw(15) << l.getCantidadEjemplares()
          << std::endl;
+}
+
+bool libroArchivo::existeIsbn(const std::string& isbnBuscado, libro& libroEncontrado) {
+    FILE* f = fopen(_libroArchivo.c_str(), "rb");
+    if (!f) return false;
+
+    libro l;
+    while (fread(&l, sizeof(libro), 1, f) == 1) {
+        if (l.getIsbn() == isbnBuscado) {
+            libroEncontrado = l;
+            fclose(f);
+            return true;
+        }
+    }
+    fclose(f);
+    return false;
 }

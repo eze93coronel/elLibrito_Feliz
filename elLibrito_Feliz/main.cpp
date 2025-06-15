@@ -4,11 +4,13 @@
 #include "socioManager.h"
 #include "menuLibro.h"
 #include "libroArchivo.h"
+#include <windows.h>
+
 using namespace std;
 
 int main()
 {
-
+    SetConsoleOutputCP(CP_UTF8);
     menuLibreria menu;
     menuLibro menuLibro;
     int opc;
@@ -33,7 +35,7 @@ int main()
                     break;
             case 4:
                 std::cout << "==================================================" << std::endl;
-                std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
+                std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. Â¡HASTA LUEGO!" << std::endl;
                 std::cout << "==================================================" << std::endl;
                 std::exit(0);
                 break;

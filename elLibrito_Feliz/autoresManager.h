@@ -16,6 +16,11 @@ public:
     int obtenerSiguienteIdAutor();
     void listarAutores();
     std::string buscarNombrePorId(int idBuscado);
+    int seleccionarOcrearAutorPorNombre();
+    int buscarCoincidenciasPorNombre(const std::string& nombreParcial, Autores coincidencias[], int maxCoincidencias);
+
+
+
 
 };
 

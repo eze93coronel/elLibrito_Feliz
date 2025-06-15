@@ -353,8 +353,8 @@ libros_raw = """
 9780060931957,The Odyssey of Homer,Homer,1999-11-13,1,0
 9780451527363,The Odyssey,Homer,1999-12-14,6,0
 9781857150940,The Odyssey,Homer,1992-03-01,5,0
-9780140442373,Rabouilleuse,Honoré de Balzac,1970-01-15,2,0
-9781406506587,Lost Illusions,Honoré de Balzac,2006-02-16,3,0
+9780140442373,Rabouilleuse,Honore de Balzac,1970-01-15,2,0
+9781406506587,Lost Illusions,Honore de Balzac,2006-02-16,3,0
 9780140442052,Cousin Pons,Honore Balzac,2006-03-17,5,0
 9780140442328,A Harlot High and Low,Honore Balzac,1970-04-18,4,0
 9781904316343,Judas Pig,Horace Silver,2004-05-19,1,0
@@ -544,7 +544,7 @@ libros_raw = """
 9780618083572,The Return of the Shadow,John Ronald Reuel Tolkien,2000-02-17,3,0
 9780618260584,The Lord of the Rings,John Ronald Reuel Tolkien,2002-09-12,5,0
 9780618574957,The Two Towers,John Ronald Reuel Tolkien,2004-10-13,4,0
-9780618894642,Children of Húrin,John Ronald Reuel Tolkien,2007-11-14,1,0
+9780618894642,Children of Hurin,John Ronald Reuel Tolkien,2007-11-14,1,0
 9781594130076,The Fellowship of the Ring,John Ronald Reuel Tolkien,2003-12-15,6,0
 9780425152898,Mind Prey,John Sandford,1996-04-19,4,0
 9780425182871,Chosen Prey,John Sandford,2002-05-20,1,0
@@ -921,10 +921,10 @@ libros_raw = """
 9781590171240,An Episode of Sparrows,Rumer Godden,2004-04-03,4,0
 9780718149291,Medicus and the Disappearing Dancing Girls,Ruth Downie,2006-03-20,5,0
 9780312183011,Radio On,Sarah Vowell,1997-08-12,3,0
-9780231073370,The Pillow Book of Sei Sh?nagon,Sei Shōnagon,1991-09-13,5,0
+9780231073370,The Pillow Book of Sei Sh?nagon,Sei Shonagon,1991-09-13,5,0
 9780006472612,Master of the Game,Sidney Sheldon,1982-10-22,4,0
 9780006479673,If Tomorrow Comes,Sidney Sheldon,1994-11-23,1,0
-9780195144819,El Libertador,Simón Bolívar,2003-10-14,4,0
+9780195144819,El Libertador,Simon Bolivar,2003-10-14,4,0
 9780552998871,The Secret Dreamworld of a Shopaholic,Sophie Kinsella,2000-01-16,2,0
 9780140443073,Love,Stendhal,1975-11-15,1,0
 9780393927207,The Norton Anthology of English Literature,Stephen Greenblatt,2006-12-16,6,0
@@ -1030,7 +1030,7 @@ libros_raw = """
 9780679736530,The Hamlet,William Faulkner,1991-09-19,5,0
 9780679748144,Sanctuary,William Faulkner,1993-10-20,4,0
 9780140187076,J R,William Gaddis,1993-11-21,1,0
-9780142437636,Agapē Agape,William Gaddis,2003-12-22,6,0
+9780142437636,Agape Agape,William Gaddis,2003-12-22,6,0
 9780425198681,Pattern Recognition,William Gibson,2005-01-23,2,0
 9780441012039,Neuromancer,William Gibson,2004-02-24,3,0
 9780441013678,Count Zero,William Gibson,2006-03-25,5,0
@@ -1077,6 +1077,8 @@ for libro in libros:
         autor_id[autor] = id_counter
         id_counter += 1
 
+
+
 # Crear lista libros con codigo de autor reemplazado y fecha desglosada
 libros_cod_autor = []
 for libro in libros:
@@ -1090,10 +1092,10 @@ for libro in libros:
 # autores: i 50s               -> id_autor, nombre
 
 formato_libro = '14s50siiiiii'
-formato_autor = 'i50s'
+
 
 # Guardar libros.dat
-with open("C:/Users/alvar/Documents/GitHub/elLibrito_Feliz2/elLibrito_Feliz/archivos/libros.dat", "wb") as f:
+with open("C:/Users/alvar/Documents/GitHub/elLibrito_Feliz/elLibrito_Feliz/archivos/libros.dat", "wb") as f:
     for libro in libros_cod_autor:
         isbn_bytes = libro[0].encode('utf-8')[:13].ljust(14, b'\0')
         titulo_bytes = libro[1].encode('utf-8')[:50].ljust(50, b'\0')
@@ -1108,11 +1110,14 @@ with open("C:/Users/alvar/Documents/GitHub/elLibrito_Feliz2/elLibrito_Feliz/arch
         f.write(registro)
 
 # Guardar autores.dat
-with open("C:/Users/alvar/Documents/GitHub/elLibrito_Feliz2/elLibrito_Feliz/archivos/autores.dat", "wb") as f:
+with open("C:/Users/alvar/Documents/GitHub/elLibrito_Feliz/elLibrito_Feliz/archivos/autores.dat", "wb") as f:
     for autor, id_autor in autor_id.items():
-        nombre_bytes = autor.encode('utf-8')[:50].ljust(50, b'\0')
-        registro = struct.pack(formato_autor, id_autor, nombre_bytes)
-        f.write(registro)
+        print(id_autor, " " ,autor)
+        nombre_bytes = autor.encode("utf-8")[:50].ljust(50, b'\0')  # ajusta a 50 chars con padding nulo
 
+        formato_autor = 'i50s2x'
+        registro = struct.pack(formato_autor, id_autor, nombre_bytes)
+        print(f"Tamaño de registro: {len(registro)}")  # Debería decir 54
+        f.write(registro)
 print("Archivos binarios libros.dat y autores.dat creados correctamente.")
 
