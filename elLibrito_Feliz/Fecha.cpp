@@ -8,6 +8,12 @@ Fecha::Fecha() {
     _anio = 0;
 
 }
+
+Fecha::Fecha(int dia, int mes, int anio) {
+    _dia = dia;
+    _mes = mes;
+    _anio = anio;
+}
 void Fecha::setDia(int dia) {
      if(dia < 1 || dia > 31  ) {
      std::cout << "Error : el dia debe ser entre 1 y 31 " << std::endl;

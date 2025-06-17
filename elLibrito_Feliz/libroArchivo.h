@@ -17,11 +17,14 @@ public:
     void NuevoLibro();
     bool guardarLibro(libroArchivo libro);
     void prestarLibro();
+    bool registrarPrestamoLibro(int posRegistro); ///
     bool elegirCriterioBusqueda(int& opc, std::string& criterio);
     void mostrarEncabezadoTablaLibros();
     void mostrarLibroEnTabla(libro& l, autoresManager& manager);
     bool existeIsbn(const std::string& isbnBuscado, libro& libroEncontrado);
     void modificarLibro();
     void devolverLibro();
+    std::string getRutaArchivo() const { return _libroArchivo; }
+
 
 };

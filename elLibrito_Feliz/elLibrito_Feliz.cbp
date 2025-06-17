@@ -57,6 +57,12 @@
 		<Unit filename="menuLibreria.h" />
 		<Unit filename="menuLibro.cpp" />
 		<Unit filename="menuLibro.h" />
+		<Unit filename="menuPrestamos.cpp" />
+		<Unit filename="menuPrestamos.h" />
+		<Unit filename="prestamos.cpp" />
+		<Unit filename="prestamos.h" />
+		<Unit filename="prestamosManager.cpp" />
+		<Unit filename="prestamosManager.h" />
 		<Unit filename="socioManager.cpp" />
 		<Unit filename="socioManager.h" />
 		<Unit filename="sociosArchivos.cpp" />

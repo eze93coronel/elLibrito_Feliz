@@ -6,38 +6,58 @@
 #include <cstdio>
 #include <limits>
 #include "Fecha.h"
+#include "funcionesAuxiliares.h"
+#include <ctime>
 
 using namespace std;
 
-std::string toLower(const std::string& s) {
-        std::string s_lower = s;
-        std::transform(s_lower.begin(), s_lower.end(), s_lower.begin(),
-                       [](unsigned char c) { return std::tolower(c); });
-        return s_lower;
+/****FUNCIONES COMUNES A TODOS LOS ARCHIVOS****/
+FILE* abrirArchivo(const std::string& rutaArchivo, const char* modo) {
+    FILE* f = std::fopen(rutaArchivo.c_str(), modo);
+    if (!f) {
+        std::cerr << "No se pudo abrir el archivo: " << rutaArchivo << std::endl;
+        return nullptr;
+    }
+    return f;
+}
+
+bool guardarRegistro(const std::string& rutaArchivo, const void* registro, size_t tamanio) {
+    FILE* f = abrirArchivo(rutaArchivo, "ab");
+    if (!f) return false;
+
+    bool exito = fwrite(registro, tamanio, 1, f) == 1;
+    fclose(f);
+    if (exito) {
+    std::cout << "EL REGISTRO FUE GUARDADO CORRECTAMENTE" << std::endl;}
+    else {
+    std::cout << "ERROR: NO SE PUDO GUARDAR EL REGISTRO" << std::endl;}
+    return exito;
 }
 
 int contarRegistros(const std::string& rutaArchivo, int tamanioRegistro) {
-    FILE* archivo = fopen(rutaArchivo.c_str(), "rb");
-    if (!archivo) return 0;
-
-    fseek(archivo, 0, SEEK_END);
-    int totalBytes = ftell(archivo);
-    fclose(archivo);
+        FILE* f = abrirArchivo(rutaArchivo, "rb");
+        fseek(f, 0, SEEK_END);
+        int totalBytes = ftell(f);
+        fclose(f);
 
     return totalBytes / tamanioRegistro;
 }
 
 bool leerRegistroBinario(void* destino, int tamanioRegistro, int pos, const std::string& rutaArchivo) {
-    FILE* archivo = fopen(rutaArchivo.c_str(), "rb");
-    if (!archivo) {
-        std::cout << "Error: No se pudo abrir el archivo: " << rutaArchivo << std::endl;
-        return false;
-    }
+    FILE* archivo = abrirArchivo(rutaArchivo, "rb");
 
     fseek(archivo, tamanioRegistro * pos, SEEK_SET);
     bool exito = fread(destino, tamanioRegistro, 1, archivo) == 1;
     fclose(archivo);
     return exito;
+}
+
+/***FUNCIONES COMUNES PARA MANEJO DE FECHAS Y BUSQUEDAS DE STRINGS***/
+std::string toLower(const std::string& s) {
+        std::string s_lower = s;
+        std::transform(s_lower.begin(), s_lower.end(), s_lower.begin(),
+                       [](unsigned char c) { return std::tolower(c); });
+        return s_lower;
 }
 
 std::string trim(const std::string& str) {
@@ -129,4 +149,29 @@ int leerOpcionRango(int minimo, int maximo, const std::string& mensaje) {
     } while (opcion < minimo || opcion > maximo);
 
     return opcion;
+}
+
+Fecha fechaActual() {
+    time_t t = time(nullptr);
+    tm* ahora = localtime(&t);
+
+    Fecha f;
+    f.setDia(ahora->tm_mday);
+    f.setMes(ahora->tm_mon + 1);
+    f.setAnio(ahora->tm_year + 1900);
+
+    return f;
+}
+
+int compararFechas(Fecha& a, Fecha& b) {
+    if (a.getAnio() < b.getAnio()) return -1;
+    if (a.getAnio() > b.getAnio()) return 1;
+
+    if (a.getMes() < b.getMes()) return -1;
+    if (a.getMes() > b.getMes()) return 1;
+
+    if (a.getDia() < b.getDia()) return -1;
+    if (a.getDia() > b.getDia()) return 1;
+
+    return 0; // Las fechas son iguales
 }

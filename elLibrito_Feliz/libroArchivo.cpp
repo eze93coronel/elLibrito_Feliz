@@ -20,9 +20,8 @@ libroArchivo::libroArchivo(std::string libroArchivo){
        this -> _libroArchivo = libroArchivo;
 }
 
-///1. GUARDAR UN NUEVO LIBRO
+/// 1. GUARDAR UN NUEVO LIBRO
 void libroArchivo::NuevoLibro() {
-    libroArchivo archivo;
     libro l;
     autoresManager managerAutores;
 
@@ -37,7 +36,7 @@ void libroArchivo::NuevoLibro() {
         isbn = trim(isbn);
 
         if (isbn.empty()) {
-            std::cout << "El ISBN no puede estar vacío.\n";
+            std::cout << "El ISBN no puede estar vacío." << std::endl;
             continue;
         }
 
@@ -97,14 +96,10 @@ void libroArchivo::NuevoLibro() {
     l.setFechaPublicacion(fecha);
     std::cout << "===============================" << std::endl;
 
-    if (archivo.guardarLibro(l)) {
-        std::cout << "EL LIBRO FUE GUARDADO CORRECTAMENTE" << std::endl;
-    } else {
-        std::cout << "ERROR: NO SE PUDO GUARDAR EL LIBRO" << std::endl;
-    }
+    guardarRegistro(_libroArchivo, &l, sizeof(libro));
 }
 
-///2.  ESTA FUNCION SIRVE PARA MOSTRAR EL LIBRO EN LA POSICIÓN SELECCIONADA, A FUTURO DEBERÍA CAMBIARSE PARA QUE EN VEZ DE TOMAR LA POSICIÓN TOME EL TÍTULO, EL ISBN O EL AUTOR.
+/// 2.  ESTA FUNCION SIRVE PARA MOSTRAR EL LIBRO EN LA POSICIÓN SELECCIONADA, A FUTURO DEBERÍA CAMBIARSE PARA QUE EN VEZ DE TOMAR LA POSICIÓN TOME EL TÍTULO, EL ISBN O EL AUTOR.
 void libroArchivo::buscarLibro() {
     int opc;
     std::string criterio;
@@ -113,11 +108,7 @@ void libroArchivo::buscarLibro() {
         return;
     }
 
-    FILE* f = std::fopen(_libroArchivo.c_str(), "rb");
-    if (!f) {
-        std::cout << "No se pudo abrir el archivo de libros." << std::endl;
-        return;
-    }
+    FILE* f = abrirArchivo(_libroArchivo, "rb");
 
     std::regex patron;
     std::string criterioLow = toLower(criterio);
@@ -156,99 +147,7 @@ void libroArchivo::buscarLibro() {
     }
 }
 
-///3. PRESTAR LIBROS
-void libroArchivo::prestarLibro(){
-    int opc = 0;
-    std::string criterio;
-    if (!elegirCriterioBusqueda(opc, criterio)) {
-        return;
-    }
-    FILE* f = std::fopen(_libroArchivo.c_str(), "rb");
-    if (!f) {
-        std::cerr << "No se pudo abrir el archivo de libros." << std:: endl;
-        return;
-    }
-
-    std::vector<std::pair<libro, long>> matches;
-    libro l;
-    long pos = 0;
-    std::regex patron;
-    std::string criterioLow = toLower(criterio);
-    if (opc == 1) {
-        patron = std::regex(criterioLow, std::regex_constants::icase);
-    }
-
-    while (std::fread(&l, sizeof(libro), 1, f) == 1) {
-        bool coincide = (opc == 1)
-            ? std::regex_search(toLower(l.getTitulo()), patron)  ///if
-            : (l.getIsbn() == criterio); ///else
-        if (coincide) {
-            matches.emplace_back(l, pos);
-        }
-        ++pos;
-    }
-    std::fclose(f);
-
-    if (matches.empty()) {
-        std::cout << "No se encontraron libros para \"" << criterio << "\".\n";
-        return;
-    }
-
-    // Mostrar menú solo con las coincidencias
-    std::cout << "Libros encontrados: " << std::endl;
-    for (size_t i = 0; i < matches.size(); ++i) {
-        libro lb = matches[i].first;
-        std::cout << " [" << (i+1) << "] " << lb.getTitulo() << " (Prestados: " << lb.getlibrosPrestados() << " / " << lb.getCantidadEjemplares() << ")\n";
-    }
-    size_t sel = 0;     // Leer selección válida
-    do {
-        std::cout << "Seleccione un numero (1-" << matches.size() << "): ";
-        std::cin >> sel;
-    } while (sel < 1 || sel > matches.size());
-
-    // Datos del socio // esta parte todavía no modifica el archivo de socios ni de prestamos solo pide los datos.
-    std::string nombreSocio;
-    int idSocio;
-    std::cin.ignore();
-    std::cout << "Nombre del socio: ";
-    std::getline(std::cin, nombreSocio);
-    std::cout << "ID del socio: ";
-    std::cin >> idSocio;
-
-    // 2ª pasada: reabrir en lectura/escritura y actualizar ese registro
-    long index = matches[sel-1].second;
-    f = std::fopen(_libroArchivo.c_str(), "rb+");
-    if (!f) {
-        std::cout << "No se pudo reabrir el archivo.\n";
-        return;
-    }
-    std::fseek(f, index * sizeof(libro), SEEK_SET); // Movernos al registro exacto
-    std::fread(&l, sizeof(libro), 1, f); // Leer la última versión
-
-    // Control de stock
-    int nuevosPrestados = l.getlibrosPrestados() + 1;
-    if (nuevosPrestados > l.getCantidadEjemplares()) {
-        std::cout << "No quedan ejemplares disponibles para prestar.\n";
-        std::fclose(f);
-        return;
-    }
-    l.setlibrosPrestados(nuevosPrestados);
-
-    // Volver atrás y escribir
-    std::fseek(f, -static_cast<long>(sizeof(libro)), SEEK_CUR);
-    std::fwrite(&l, sizeof(libro), 1, f);
-    std::fflush(f);
-    std::fclose(f);
-
-    // Confirmación final
-    std::cout << "\nPrestamo registrado con exito:\n"
-              << " Titulo: " << l.getTitulo() << "\n"
-              << " Total prestados de ese título: " << l.getlibrosPrestados() << "\n"
-              << " Socio: " << nombreSocio
-              << " (ID " << idSocio << ")\n";
-}
-
-/// 4. MODIFICAR LIBRO
+/// 3. MODIFICAR LIBRO
 void libroArchivo::modificarLibro() {
     autoresManager manager;
     int continuar = 2;
@@ -260,12 +159,7 @@ void libroArchivo::modificarLibro() {
         std::string criterioLower = toLower(criterio);
         std::regex patron(criterioLower, std::regex_constants::icase);
 
-        FILE* f = fopen(_libroArchivo.c_str(), "rb+");
-        if (!f) {
-            std::cout << "No se pudo abrir el archivo de libros.\n";
-            return;
-        }
-
+        FILE* f = abrirArchivo(_libroArchivo, "rb+");
         std::vector<std::pair<libro, long>> coincidencias;
         libro l;
         long pos = 0;
@@ -378,104 +272,124 @@ void libroArchivo::modificarLibro() {
     } while (continuar == 2);
 }
 
-
-/// 5. DEVOLVER LIBRO: esto debe contemplar primero al socio, qué libros tiene en su haber y seleccionar el que quiere devolver.
-void libroArchivo::devolverLibro() {
+/// 4. PRESTAR LIBROS
+void libroArchivo::prestarLibro(){
     int opc = 0;
     std::string criterio;
     if (!elegirCriterioBusqueda(opc, criterio)) {
         return;
     }
-
-    FILE* f = std::fopen(_libroArchivo.c_str(), "rb");
-    if (!f) {
-        std::cerr << "No se pudo abrir el archivo de libros.\n";
-        return;
-    }
+    FILE* f = abrirArchivo(_libroArchivo, "rb");
 
     std::vector<std::pair<libro, long>> matches;
     libro l;
     long pos = 0;
     std::regex patron;
     std::string criterioLow = toLower(criterio);
-    if (opc == 1 || opc == 3) {
+    if (opc == 1) {
         patron = std::regex(criterioLow, std::regex_constants::icase);
     }
 
     while (std::fread(&l, sizeof(libro), 1, f) == 1) {
-        bool coincide = false;
-        if (opc == 1)
-            coincide = std::regex_search(toLower(l.getTitulo()), patron);
-        else if (opc == 2)
-            coincide = l.getIsbn() == criterio;
-        else if (opc == 3) {
-            autoresManager manager;
-            std::string nombreAutor = manager.buscarNombrePorId(l.getIdAutor());
-            coincide = std::regex_search(toLower(nombreAutor), patron);
-        }
-
+        bool coincide = (opc == 1)
+            ? std::regex_search(toLower(l.getTitulo()), patron)  ///if
+            : (l.getIsbn() == criterio); ///else
         if (coincide) {
             matches.emplace_back(l, pos);
         }
         ++pos;
     }
-    std::fclose(f);
+    fclose(f);
 
     if (matches.empty()) {
         std::cout << "No se encontraron libros para \"" << criterio << "\".\n";
         return;
     }
 
-    // Mostrar coincidencias
-    std::cout << "Libros encontrados:\n";
-    for (size_t i = 0; i < matches.size(); ++i) {
-        libro lb = matches[i].first;
-        std::cout << " [" << (i + 1) << "] " << lb.getTitulo()
-                  << " (Prestados: " << lb.getlibrosPrestados()
-                  << " / " << lb.getCantidadEjemplares() << ")\n";
-    }
+    // Mostrar menú solo con las coincidencias
+    std::cout << "Libros encontrados: " << std::endl;
+    mostrarEncabezadoTablaLibros();
+    autoresManager manager;
 
-    size_t sel = 0;
+    for (size_t i = 0; i < matches.size(); ++i) {
+        std::cout << "[" << (i + 1) << "] ";
+        mostrarLibroEnTabla(matches[i].first, manager);
+    }
+    size_t sel = 0;     // Leer selección válida
     do {
-        std::cout << "Seleccione un número (1-" << matches.size() << "): ";
+        std::cout << "Seleccione un numero (1-" << matches.size() << "): ";
         std::cin >> sel;
     } while (sel < 1 || sel > matches.size());
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // Datos del socio // esta parte todavía no modifica el archivo de socios ni de prestamos solo pide los datos.
+    std::string nombreSocio;
+    int idSocio;
+    std::cin.ignore();
+    std::cout << "Nombre del socio: ";
+    std::getline(std::cin, nombreSocio);
+    std::cout << "ID del socio: ";
+    std::cin >> idSocio;
 
-    // Reabrir el archivo en modo lectura/escritura
-    long index = matches[sel - 1].second;
-    f = std::fopen(_libroArchivo.c_str(), "rb+");
-    if (!f) {
-        std::cout << "No se pudo reabrir el archivo.\n";
-        return;
-    }
+    // 2ª pasada: reabrir en lectura/escritura y actualizar ese registro
+    long index = matches[sel-1].second;
+    f = abrirArchivo(_libroArchivo, "rb+");
 
-    std::fseek(f, index * sizeof(libro), SEEK_SET);
-    std::fread(&l, sizeof(libro), 1, f);
+    std::fseek(f, index * sizeof(libro), SEEK_SET); // Movernos al registro exacto
+    std::fread(&l, sizeof(libro), 1, f); // Leer la última versión
 
-    if (l.getlibrosPrestados() == 0) {
-        std::cout << "Este libro no tiene ejemplares prestados actualmente.\n";
+    // Control de stock
+    int nuevosPrestados = l.getlibrosPrestados() + 1;
+    if (nuevosPrestados > l.getCantidadEjemplares()) {
+        std::cout << "No quedan ejemplares disponibles para prestar.\n";
         std::fclose(f);
         return;
     }
+    l.setlibrosPrestados(nuevosPrestados);
 
-    l.setlibrosPrestados(l.getlibrosPrestados() - 1);
-
+    // Volver atrás y escribir
     std::fseek(f, -static_cast<long>(sizeof(libro)), SEEK_CUR);
     std::fwrite(&l, sizeof(libro), 1, f);
     std::fflush(f);
     std::fclose(f);
 
-    std::cout << "\nDevolución registrada con éxito:\n"
-              << " Título: " << l.getTitulo() << "\n"
-              << " Prestados restantes: " << l.getlibrosPrestados() << "\n";
+    // Confirmación final
+    std::cout << "\nPrestamo registrado con exito:\n"
+              << " Titulo: " << l.getTitulo() << "\n"
+              << " Total prestados de ese título: " << l.getlibrosPrestados() << "\n"
+              << " Socio: " << nombreSocio
+              << " (ID " << idSocio << ")\n";
+}
+
+bool libroArchivo::registrarPrestamoLibro(int posRegistro) {
+    FILE* f = abrirArchivo(_libroArchivo, "rb+");
+    if (!f) return false;
+
+    libro l;
+    std::fseek(f, posRegistro * sizeof(libro), SEEK_SET);
+    std::fread(&l, sizeof(libro), 1, f);
+
+    int nuevosPrestados = l.getlibrosPrestados() + 1;
+    if (nuevosPrestados > l.getCantidadEjemplares()) {
+        fclose(f);
+        return false;
+    }
+
+    l.setlibrosPrestados(nuevosPrestados);
+    std::fseek(f, -static_cast<long>(sizeof(libro)), SEEK_CUR);
+    std::fwrite(&l, sizeof(libro), 1, f);
+    fclose(f);
+    return true;
+}
+
+/// 5. DEVOLVER LIBRO: esto debe contemplar primero al socio, qué libros tiene en su haber y seleccionar el que quiere devolver.
+void libroArchivo::devolverLibro() {
+    cout << "Aca va una funcion" << endl;
 }
 
 ///6. STOCK DE LIBROS
 void libroArchivo::listarLibros() {
     int stockActual = 0;
-    int totalRegistrosLibro = getCantidadRegistroLibro();
+    int totalRegistrosLibro = contarRegistros(_libroArchivo, sizeof(libro));
     if (totalRegistrosLibro == 0) {
         cout << "No hay libros para mostrar." << endl;
         return;
@@ -495,26 +409,6 @@ void libroArchivo::listarLibros() {
 }
 
 ///########### AUXILIARES #########////
-///Esta función se podría hacer genérica para todas las clases.
-bool libroArchivo::guardarLibro(const libro& l) {
-    FILE* punteroArchivoLibro = fopen(_libroArchivo.c_str(), "ab");
-
-    if (punteroArchivoLibro == nullptr) {
-        std::cout << " ===== NO SE PUDO ABRIR EL ARCHIVO DE LIBROS ==== " << std::endl;
-        return false;
-    }
-
-    bool exito = fwrite(&l, sizeof(libro), 1, punteroArchivoLibro);
-    fclose(punteroArchivoLibro);
-
-    return exito;
-}
-
-///Esta función se podría hacer genérica para todas las clases.
-int libroArchivo::getCantidadRegistroLibro() {
-    return contarRegistros(_libroArchivo, sizeof(libro));
-}
-
 bool libroArchivo::elegirCriterioBusqueda(int& opc, std::string& criterio) {
     do {
         std::cout << "1) Buscar por TITULO" << std::endl;
@@ -561,7 +455,7 @@ bool libroArchivo::elegirCriterioBusqueda(int& opc, std::string& criterio) {
     } while (true);
 }
 
-// Lee un libro de la posición indicada
+/// Lee un libro de la posición indicada
 libro libroArchivo::LeerLibro(int pos) {
     libro l;
     if (!leerRegistroBinario(&l, sizeof(libro), pos, _libroArchivo)) {
@@ -598,9 +492,9 @@ void libroArchivo::mostrarLibroEnTabla(libro& l, autoresManager& manager) {
          << std::endl;
 }
 
+///Estoy casi segura que esta función se debería hacer reutilizable .. porque se podría buscar ID de Socio o de prestamo..
 bool libroArchivo::existeIsbn(const std::string& isbnBuscado, libro& libroEncontrado) {
-    FILE* f = fopen(_libroArchivo.c_str(), "rb");
-    if (!f) return false;
+    FILE* f = abrirArchivo(_libroArchivo, "rb");
 
     libro l;
     while (fread(&l, sizeof(libro), 1, f) == 1) {

@@ -71,13 +71,11 @@ void menuLibro::mostrarMenuLibro() {
             std::cout << "===============================" << std::endl;
             std::cout << "DEVOLVER LIBRO" << std::endl;
             std::cout << "==============================="<< std::endl;
-            ///aLibro.prestarLibro();
             aLibro.devolverLibro();
             system("pause");
         break;
 
        case 6:
-
            return;
        case 7:
         std::cout << "==================================================" << std::endl;
@@ -87,7 +85,7 @@ void menuLibro::mostrarMenuLibro() {
         break;
     }
     system("cls");
-  } while(opcion!=8);
+  } while(opcion!=7);
 
 
 }

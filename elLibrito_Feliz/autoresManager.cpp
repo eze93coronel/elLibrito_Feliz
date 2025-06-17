@@ -17,12 +17,7 @@ autoresManager::autoresManager(std::string autoresManager) {
 }
 
 void autoresManager::listarAutores() {
-    FILE* archivo = fopen(_autoresManager.c_str(), "rb");
-    if (archivo == nullptr) {
-        std::cout << "No se pudo abrir el archivo de autores." << std::endl;
-        return;
-    }
-
+    FILE* archivo = abrirArchivo(_autoresManager, "rb");
     Autores a;
     cout << sizeof(Autores) << endl;
 
@@ -43,10 +38,7 @@ void autoresManager::listarAutores() {
 }
 
 int autoresManager::obtenerSiguienteIdAutor() {
-    FILE* f = fopen(_autoresManager.c_str(), "rb");
-    if (!f) {
-        return 1;  // Empezamos desde 1 si el archivo no existe
-    }
+    FILE* f = abrirArchivo(_autoresManager, "rb");
 
     Autores a;
     int maxId = 0;
@@ -80,9 +72,7 @@ std::string autoresManager::buscarNombrePorId(int idBuscado) {
 }
 
 int autoresManager::buscarCoincidenciasPorNombre(const std::string& nombreParcial, Autores coincidencias[], int maxCoincidencias) {
-    FILE* archivoAutores = fopen(_autoresManager.c_str(), "rb");
-    if (!archivoAutores) return 0;
-
+    FILE* archivoAutores = abrirArchivo(_autoresManager, "rb");
     Autores a;
     int encontrados = 0;
 
@@ -93,7 +83,6 @@ int autoresManager::buscarCoincidenciasPorNombre(const std::string& nombreParcia
             encontrados++;
         }
     }
-
     fclose(archivoAutores);
     return encontrados;
 }
@@ -159,7 +148,7 @@ int autoresManager::seleccionarOcrearAutorPorNombre() {
     nuevoAutor.setIdAutor(nuevoId);
     nuevoAutor.setNombreAutor(nombreCompleto);
 
-    FILE* fa = fopen(_autoresManager.c_str(), "ab");
+    FILE* fa = abrirArchivo(_autoresManager, "ab"); ///aca hice cambios por si no funciona
     if (fa != nullptr) {
         fwrite(&nuevoAutor, sizeof(Autores), 1, fa);
         fclose(fa);

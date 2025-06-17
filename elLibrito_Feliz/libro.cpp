@@ -19,7 +19,6 @@ libro::libro(std::string isbn, std::string titulo, int IdAutor, int cantidadEjem
     setlibrosPrestados(librosPrestados);
 }
 
-
 bool libro::setIsbn(std::string isbn) {
     if (isbn.empty()) {
         std::cout << "El ISBN del libro no puede estar vacio" << endl << std::endl;

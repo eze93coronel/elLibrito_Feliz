@@ -3,6 +3,7 @@
 #include "menuLibreria.h"
 #include "socioManager.h"
 #include "menuLibro.h"
+#include "menuPrestamos.h"
 #include "libroArchivo.h"
 #include <windows.h>
 
@@ -13,14 +14,18 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
     menuLibreria menu;
     menuLibro menuLibro;
+    libroArchivo archivoLibros;
+    menuPrestamos mP;
+
     int opc;
     while(true){
         system("cls");
         cout << "****** BIBLIOTECA EL LIBRITO FELIZ ******" << endl;
         cout << "1. MENU SOCIOS " << endl;
         cout << "2. MENU LIBROS  " << endl;
-        cout << "3. MENU REPORTES " << endl;
-        cout << "4. SALIR  " << endl;
+        cout << "3. PRESTAMOS  " << endl;
+        cout << "4. MENU REPORTES " << endl;
+        cout << "5. SALIR  " << endl;
         cout << "************************" << endl;
         cout << "SELECCIONAR OPCION: ";
         cin>>opc;
@@ -32,8 +37,15 @@ int main()
                    menuLibro.mostrarMenuLibro();
                     break;
             case 3:
+                mP.mostrarMenuPrestamos();
+
+
                     break;
             case 4:
+                cout << "Acá va el menú de reportes, pero aún no se desarrolló" << endl;
+                system("pause");
+                    break;
+            case 5:
                 std::cout << "==================================================" << std::endl;
                 std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
                 std::cout << "==================================================" << std::endl;
