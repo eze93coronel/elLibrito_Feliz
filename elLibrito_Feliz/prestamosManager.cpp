@@ -183,7 +183,6 @@ void prestamosManager::registrarDevolucion(libroArchivo& archivoLibros) {
         return;
     }
 
-    // Mostrar préstamos pendientes con título e ISBN
     cout << "===============================" << endl;
     cout << "PRÉSTAMOS PENDIENTES" << endl;
     cout << "===============================" << endl;
@@ -192,7 +191,6 @@ void prestamosManager::registrarDevolucion(libroArchivo& archivoLibros) {
         std::string isbn = prestamosPendientes[i].getISBN();
         std::string titulo = "Título no encontrado";
 
-        // Buscar el título en libros.dat
         FILE* fLibros = abrirArchivo(archivoLibros.getRutaArchivo(), "rb");
         libro l;
         while (fread(&l, sizeof(libro), 1, fLibros) == 1) {
@@ -217,13 +215,12 @@ void prestamosManager::registrarDevolucion(libroArchivo& archivoLibros) {
     long posSeleccionada = posiciones[seleccion - 1];
     Prestamos prestamoADevolver = prestamosPendientes[seleccion - 1];
 
-    // 1. Marcar como devuelto
     prestamoADevolver.setDevuelto(true);
     fseek(archivo, posSeleccionada * sizeof(Prestamos), SEEK_SET);
     fwrite(&prestamoADevolver, sizeof(Prestamos), 1, archivo);
     fflush(archivo);
 
-    // 2. Actualizar stock del libro
+    // Actualizar librosPrestados del libro correspondiente
     string isbn = prestamoADevolver.getISBN();
     long posLibro = -1;
     FILE* archLibros = abrirArchivo(archivoLibros.getRutaArchivo(), "rb+");
@@ -239,14 +236,17 @@ void prestamosManager::registrarDevolucion(libroArchivo& archivoLibros) {
     }
 
     if (posLibro != -1) {
-        l.setlibrosPrestados(l.getlibrosPrestados() - 1);
-        l.setCantidadEjemplares(l.getCantidadEjemplares() + 1);
+        int prestados = l.getlibrosPrestados();
+        if (prestados > 0) {
+            l.setlibrosPrestados(prestados - 1);  // ✅ solo restamos si hay prestados
+        }
+
         fseek(archLibros, posLibro * sizeof(libro), SEEK_SET);
         fwrite(&l, sizeof(libro), 1, archLibros);
         fflush(archLibros);
+
         cout << "Devolución registrada con éxito." << endl;
-    }
-    else {
+    } else {
         cout << "Error: no se encontró el libro para actualizar el stock." << endl;
     }
 

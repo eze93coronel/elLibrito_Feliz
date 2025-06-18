@@ -198,7 +198,7 @@
 	"funcionesAuxiliares.h"
 	<ctime>
 
-1750110606 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.cpp
+1750208816 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.cpp
 	<iostream>
 	<string>
 	<cstring>
@@ -299,7 +299,7 @@
 	"Fecha.h"
 	<string>
 
-1750131017 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.cpp
+1750207488 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.cpp
 	<iostream>
 	<cstdio>
 	<vector>

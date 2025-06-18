@@ -21,26 +21,32 @@ libro::libro(std::string isbn, std::string titulo, int IdAutor, int cantidadEjem
 
 bool libro::setIsbn(std::string isbn) {
     if (isbn.empty()) {
-        std::cout << "El ISBN del libro no puede estar vacio" << endl << std::endl;
+        std::cout << "El ISBN del libro no puede estar vacío." << std::endl << std::endl;
         return false;
     }
-    else{
-        strcpy(this -> _isbn,isbn.c_str());
-        return true;
 
+    if (isbn.length() > 13) {
+        std::cout << "Error: el ISBN no puede tener más de 13 caracteres." << std::endl;
+        return false;
     }
+
+    strcpy(_isbn, isbn.c_str());
+    return true;
 }
 
-bool libro::setTitulo(std:: string titulo){
-    if(titulo.empty() ) {
-    std::cout << "el titulo del libro no puede estar vacio" << endl << std::endl;
-    return false;
-    }
-    else{
-        strcpy(this -> _titulo,titulo.c_str());
-        return true;
+bool libro::setTitulo(std::string titulo) {
+    if (titulo.empty()) {
+        std::cout << "El título no puede estar vacío." << std::endl;
+        return false;
     }
 
+    if (titulo.length() > 50) {
+        std::cout << "Error: el título no puede tener más de 50 caracteres." << std::endl;
+        return false;
+    }
+
+    strcpy(_titulo, titulo.c_str());
+    return true;
 }
 
 void libro::setIdAutor(int IdAutor){
@@ -62,7 +68,7 @@ void libro::setIdAutor(int IdAutor){
 }
 
  void libro::setlibrosPrestados(int librosPrestados){
-     if(librosPrestados < 1   )
+     if(librosPrestados < 0)
     {
             cout << "Aun no se han ingresado prestamos de este libro." << endl;
         return;
