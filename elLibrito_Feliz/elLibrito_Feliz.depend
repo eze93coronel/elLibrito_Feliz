@@ -225,13 +225,14 @@
 	<cctype>
 	"Fecha.h"
 
-1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\main.cpp
+1750367161 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\main.cpp
 	<iostream>
 	"Socio.h"
 	"menuLibreria.h"
 	"socioManager.h"
 	"menuLibro.h"
 	"menuPrestamos.h"
+	"menuReportes.h"
 	"libroArchivo.h"
 	<windows.h>
 
@@ -565,12 +566,12 @@
 	"cuotasManager.h"
 	"sociosArchivos.h"
 
-1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.cpp
+1750367241 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.cpp
 	"MenuReportes.h"
 	"Reportes.h"
 	<iostream>
 
-1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.h
+1750367236 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.h
 
 1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\reportes.h
 	<string>

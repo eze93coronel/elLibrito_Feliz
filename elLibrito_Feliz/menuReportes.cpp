@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void MenuReportes::mostrarMenuReportes()
+void menuReportes::mostrarMenuReportes()
 {
     Reportes rep;
     int opcion;

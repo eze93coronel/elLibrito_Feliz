@@ -4,6 +4,7 @@
 #include "socioManager.h"
 #include "menuLibro.h"
 #include "menuPrestamos.h"
+#include "menuReportes.h"
 #include "libroArchivo.h"
 #include <windows.h>
 
@@ -16,6 +17,7 @@ int main()
     menuLibro menuLibro;
     libroArchivo archivoLibros;
     menuPrestamos mP;
+    menuReportes mRepo;
 
     int opc;
     while(true){
@@ -40,7 +42,7 @@ int main()
                 mP.mostrarMenuPrestamos();
                     break;
             case 4:
-                cout << "Acá va el menú de reportes, pero aún no se desarrolló" << endl;
+                mRepo.mostrarMenuReportes();
                 system("pause");
                     break;
             case 5:
