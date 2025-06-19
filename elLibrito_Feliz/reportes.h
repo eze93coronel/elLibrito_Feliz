@@ -7,7 +7,7 @@ class Reportes
 private:
     std::string _libroArchivo;
     std::string _prestamosArchivo;
-    std::string _socioArchivo
+    std::string _socioArchivo;
 public:
     Reportes();
     Reportes(std::string libroArchivo);

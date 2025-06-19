@@ -323,11 +323,12 @@
 
 1750126566 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.h
 
-1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.cpp
+1750358671 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.cpp
 	<iostream>
+	<ctime>
 	"Fecha.h"
 
-1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.h
+1750358682 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.h
 
 1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\libro.cpp
 	<iostream>
@@ -371,7 +372,7 @@
 	<cctype>
 	"Fecha.h"
 
-1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\main.cpp
+1750357283 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\main.cpp
 	<iostream>
 	"Socio.h"
 	"menuLibreria.h"
@@ -379,6 +380,7 @@
 	"menuLibro.h"
 	"menuPrestamos.h"
 	"libroArchivo.h"
+	"menuReportes.h"
 	<windows.h>
 
 1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\socio.h
@@ -484,14 +486,24 @@
 	"prestamosManager.h"
 	"prestamos.h"
 
-1750289381 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.cpp
+1750358590 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.cpp
 	"reportes.h"
-	"libroArchivo.h"
 	"libro.h"
+	"Socio.h"
+	"prestamos.h"
 	"funcionesAuxiliares.h"
+	"Fecha.h"
 	<iostream>
 	<iomanip>
+	<map>
 
-1750289319 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.h
+1750348362 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.h
 	<string>
+
+1750357658 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menureportes.cpp
+	"MenuReportes.h"
+	"Reportes.h"
+	<iostream>
+
+1750357071 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menureportes.h
 

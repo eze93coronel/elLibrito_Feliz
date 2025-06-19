@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+
 #include "Fecha.h"
 using namespace std ;
 
@@ -63,6 +65,7 @@ void Fecha::cargarFecha() {
   cin >> anio;
   setAnio(anio);
 }
+
 
 void Fecha::mostrarFecha(){
   std::cout <<_dia <<"/" <<_mes <<"/"<<_anio << std::endl;
