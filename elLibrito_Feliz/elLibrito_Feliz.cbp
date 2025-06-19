@@ -63,6 +63,8 @@
 		<Unit filename="prestamos.h" />
 		<Unit filename="prestamosManager.cpp" />
 		<Unit filename="prestamosManager.h" />
+		<Unit filename="reportes.cpp" />
+		<Unit filename="reportes.h" />
 		<Unit filename="socioManager.cpp" />
 		<Unit filename="socioManager.h" />
 		<Unit filename="sociosArchivos.cpp" />

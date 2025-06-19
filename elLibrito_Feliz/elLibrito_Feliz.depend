@@ -323,3 +323,175 @@
 
 1750126566 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.h
 
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\fecha.h
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\libro.cpp
+	<iostream>
+	<string>
+	<cstring>
+	"libro.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\libro.h
+	"Fecha.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\libroarchivo.cpp
+	<limits>
+	<iostream>
+	<cstdio>
+	<iomanip>
+	<regex>
+	<vector>
+	<algorithm>
+	"libroArchivo.h"
+	"libro.h"
+	"funcionesAuxiliares.h"
+	"autores.h"
+	"autoresManager.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
+	<string>
+	"libro.h"
+	"autoresManager.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\autoresmanager.h
+	<string>
+	"autores.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\autores.h
+	"Fecha.h"
+	<string>
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.h
+	<string>
+	<algorithm>
+	<cctype>
+	"Fecha.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\main.cpp
+	<iostream>
+	"Socio.h"
+	"menuLibreria.h"
+	"socioManager.h"
+	"menuLibro.h"
+	"menuPrestamos.h"
+	"libroArchivo.h"
+	<windows.h>
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\socio.h
+	"Fecha.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menulibreria.h
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\sociomanager.h
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menulibro.h
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menuprestamos.h
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
+	<iostream>
+	"menuLibreria.h"
+	"socioManager.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
+	<iostream>
+	"menuLibro.h"
+	"libroArchivo.h"
+	"autoresManager.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\socio.cpp
+	<iostream>
+	"Socio.h"
+	<string>
+	<cstring>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
+	<iostream>
+	"socioManager.h"
+	"Socio.h"
+	"sociosArchivos.h"
+	"Fecha.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\sociosarchivos.h
+	"Socio.h"
+	<string>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
+	<iostream>
+	<cstring>
+	"sociosArchivos.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\autores.cpp
+	<iostream>
+	<string>
+	<cstring>
+	"autores.h"
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\autoresmanager.cpp
+	<iostream>
+	<string>
+	<cstring>
+	<vector>
+	"autores.h"
+	"autoresManager.h"
+	"funcionesAuxiliares.h"
+	<iomanip>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
+	<iostream>
+	<regex>
+	<algorithm>
+	<cctype>
+	<string>
+	<cstdio>
+	<limits>
+	"Fecha.h"
+	"funcionesAuxiliares.h"
+	<ctime>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\menuprestamos.cpp
+	<iostream>
+	"menuPrestamos.h"
+	"libroArchivo.h"
+	"autoresManager.h"
+	"prestamosManager.h"
+	"prestamos.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\prestamosmanager.h
+	<string>
+	"Prestamos.h"
+	"libroArchivo.h"
+
+1750274219 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\prestamos.h
+	"Fecha.h"
+	<string>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\prestamos.cpp
+	"Prestamos.h"
+	<iostream>
+	<cstring>
+
+1750274219 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\prestamosmanager.cpp
+	<iostream>
+	<cstdio>
+	<vector>
+	<regex>
+	"funcionesAuxiliares.h"
+	"prestamosManager.h"
+	"prestamos.h"
+
+1750289381 source:c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.cpp
+	"reportes.h"
+	"libroArchivo.h"
+	"libro.h"
+	"funcionesAuxiliares.h"
+	<iostream>
+	<iomanip>
+
+1750289319 c:\users\piper\onedrive\escritorio\utn\programacion 1\cpp\tpintegradosprogii\ellibrito_feliz\ellibrito_feliz\reportes.h
+	<string>
+
