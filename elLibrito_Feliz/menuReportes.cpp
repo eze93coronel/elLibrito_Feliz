@@ -14,7 +14,7 @@ void menuReportes::mostrarMenuReportes()
         cout << " SUBMENU DE REPORTES" << endl;
         cout << "1. STOCK ACTUAL DE LIBROS" << endl;
         cout << "2. PRESTAMOS" << endl;
-        cout << "3. DEUDORES" << endl;
+        cout << "3. SOCIOS CON PRESTAMOS" << endl;
         cout << "0. VOLVER AL MENÚ PRINCIPAL" << endl;
         cout << "SELECCIONE UNA OPCION: ";
         cin >> opcion;

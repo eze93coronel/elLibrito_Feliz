@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Fecha.h"
+#include <string>
 using namespace std ;
 
 Fecha::Fecha() {

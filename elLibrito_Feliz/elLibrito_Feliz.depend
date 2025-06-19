@@ -183,9 +183,10 @@
 1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.h
 	<string>
 
-1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.cpp
+1750370465 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.cpp
 	<iostream>
 	"Fecha.h"
+	<string>
 
 1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
 	<iostream>

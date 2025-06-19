@@ -62,8 +62,6 @@
 		<Unit filename="menuPrestamos.h" />
 		<Unit filename="menuReportes.cpp" />
 		<Unit filename="menuReportes.h" />
-		<Unit filename="menuSocio.cpp" />
-		<Unit filename="menuSocio.h" />
 		<Unit filename="prestamos.cpp" />
 		<Unit filename="prestamos.h" />
 		<Unit filename="prestamosManager.cpp" />

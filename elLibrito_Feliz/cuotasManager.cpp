@@ -36,6 +36,7 @@ void cuotasManager::registrarPagoCuota() {
     cout << "== FECHA DE PAGO ==" << endl;
     fechaPago.cargarFecha();
 
+
     // Validaciones
     if (!nuevaCuota.setIdSocio(idSocio) ||
         !nuevaCuota.setMes(mes) ||
@@ -44,7 +45,6 @@ void cuotasManager::registrarPagoCuota() {
         cout << "Error en los datos ingresados. No se registrará la cuota." << endl;
         return;
     }
-
     nuevaCuota.setFechaPago(fechaPago);
 
     FILE* f = fopen("archivos/cuotas.dat", "ab");
