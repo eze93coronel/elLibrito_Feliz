@@ -162,7 +162,7 @@
 	<algorithm>
 	"libroArchivo.h"
 
-1750303369 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autoresmanager.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autoresmanager.cpp
 	<iostream>
 	<string>
 	<cstring>
@@ -172,22 +172,22 @@
 	"funcionesAuxiliares.h"
 	<iomanip>
 
-1750303369 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.h
 	<string>
 	"libro.h"
 	"autoresManager.h"
 
-1749387838 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.h
 	"Fecha.h"
 
-1750311842 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.h
 	<string>
 
-1750311842 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\fecha.cpp
 	<iostream>
 	"Fecha.h"
 
-1750358863 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.cpp
 	<iostream>
 	<regex>
 	<algorithm>
@@ -199,13 +199,13 @@
 	"funcionesAuxiliares.h"
 	<ctime>
 
-1750208816 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libro.cpp
 	<iostream>
 	<string>
 	<cstring>
 	"libro.h"
 
-1750348969 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\libroarchivo.cpp
 	<limits>
 	<iostream>
 	<cstdio>
@@ -219,13 +219,13 @@
 	"autores.h"
 	"autoresManager.h"
 
-1750358657 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\funcionesauxiliares.h
 	<string>
 	<algorithm>
 	<cctype>
 	"Fecha.h"
 
-1750311842 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\main.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\main.cpp
 	<iostream>
 	"Socio.h"
 	"menuLibreria.h"
@@ -235,36 +235,36 @@
 	"libroArchivo.h"
 	<windows.h>
 
-1750351508 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\socio.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\socio.h
 	"Fecha.h"
 
-1749308721 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibreria.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibreria.h
 
-1750357837 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociomanager.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociomanager.h
 
-1749308721 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.h
 
-1750360908 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibreria.cpp
 	<iostream>
 	<limits>
 	"menuLibreria.h"
 	"socioManager.h"
 	"cuotasManager.h"
 
-1750355792 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menulibro.cpp
 	<iostream>
 	<limits>
 	"menuLibro.h"
 	"libroArchivo.h"
 	"autoresManager.h"
 
-1750352010 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\socio.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\socio.cpp
 	<iostream>
 	"Socio.h"
 	<string>
 	<cstring>
 
-1750359321 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociomanager.cpp
 	<iostream>
 	"socioManager.h"
 	"Socio.h"
@@ -275,41 +275,41 @@
 	"cuotas.h"
 	"prestamosManager.h"
 
-1750311842 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociosarchivos.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociosarchivos.h
 	"Socio.h"
 	<string>
 
-1750311842 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\sociosarchivos.cpp
 	<iostream>
 	<cstring>
 	"sociosArchivos.h"
 	"funcionesAuxiliares.h"
 
-1749953393 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autoresmanager.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autoresmanager.h
 	<string>
 	"autores.h"
 
-1749931249 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autores.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autores.h
 	"Fecha.h"
 	<string>
 
-1749927795 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autores.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\autores.cpp
 	<iostream>
 	<string>
 	<cstring>
 	"autores.h"
 
-1750358424 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamos.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamos.cpp
 	"Prestamos.h"
 	<iostream>
 	<cstring>
 	"funcionesAuxiliares.h"
 
-1750358376 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamos.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamos.h
 	"Fecha.h"
 	<string>
 
-1750358376 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.cpp
 	<iostream>
 	<cstdio>
 	<vector>
@@ -320,12 +320,12 @@
 	"sociosArchivos.h"
 	"Socio.h"
 
-1750311842 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\prestamosmanager.h
 	<string>
 	"Prestamos.h"
 	"libroArchivo.h"
 
-1750303369 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.cpp
 	<iostream>
 	"menuPrestamos.h"
 	"libroArchivo.h"
@@ -333,14 +333,14 @@
 	"prestamosManager.h"
 	"prestamos.h"
 
-1750126566 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menuprestamos.h
 
-1750360970 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotasmanager.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotasmanager.h
 
-1750357560 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotas.h
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotas.h
 	"Fecha.h"
 
-1750359009 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotas.cpp
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotas.cpp
 	<iostream>
 	"cuotas.h"
 
@@ -546,6 +546,41 @@
 	<string>
 
 1750361941 source:c:\users\alvar\documents\github\ellibrito_feliz - copy\ellibrito_feliz\reportes.cpp
+	"reportes.h"
+	"libro.h"
+	"Socio.h"
+	"prestamos.h"
+	"funcionesAuxiliares.h"
+	"Fecha.h"
+	<iostream>
+	<iomanip>
+	<map>
+
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\cuotasmanager.cpp
+	<iostream>
+	<cstdio>
+	"cuotas.h"
+	"Fecha.h"
+	"funcionesAuxiliares.h"
+	"cuotasManager.h"
+	"sociosArchivos.h"
+
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.cpp
+	"MenuReportes.h"
+	"Reportes.h"
+	<iostream>
+
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menureportes.h
+
+1750366147 c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\reportes.h
+	<string>
+
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\menusocio.cpp
+	<iostream>
+	"menuLibreria.h"
+	"socioManager.h"
+
+1750366147 source:c:\users\alvar\documents\github\ellibrito_feliz\ellibrito_feliz\reportes.cpp
 	"reportes.h"
 	"libro.h"
 	"Socio.h"
