@@ -131,6 +131,25 @@ Fecha leerFechaValida() {
     return fecha;
 }
 
+bool esMayorFecha(const Fecha& a, const Fecha& b) {
+    int anioA = const_cast<Fecha&>(a).getAnio();
+    int anioB = const_cast<Fecha&>(b).getAnio();
+
+    if (anioA > anioB) return true;
+    if (anioA < anioB) return false;
+
+    int mesA = const_cast<Fecha&>(a).getMes();
+    int mesB = const_cast<Fecha&>(b).getMes();
+
+    if (mesA > mesB) return true;
+    if (mesA < mesB) return false;
+
+    int diaA = const_cast<Fecha&>(a).getDia();
+    int diaB = const_cast<Fecha&>(b).getDia();
+
+    return diaA > diaB;
+}
+
 int leerOpcionRango(int minimo, int maximo, const std::string& mensaje) {
     int opcion;
     do {

@@ -9,4 +9,7 @@ public :
     void cargarCantidadRegistroSocio();
     void listarSocios();
     void modificarSocio();
+    bool dniExiste(const char* rutaArchivo, const std::string& dni);
+    void resumenSocios();
+
 };

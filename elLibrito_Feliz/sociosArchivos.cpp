@@ -1,16 +1,15 @@
 #include <iostream>
 #include <cstring>
 #include "sociosArchivos.h"
+#include "funcionesAuxiliares.h"
+
 using namespace std;
 sociosArchivos::sociosArchivos(){
-     _nombreArchivoSocio = "socios.dat";
-
-
+     _nombreArchivoSocio = "archivos/socios.dat";
 }
 
 sociosArchivos::sociosArchivos(std::string nombreArchivoSocio){
        this -> _nombreArchivoSocio = nombreArchivoSocio;
-
 }
 
 bool sociosArchivos::guardarArchivoSocio(Socio registroSocio) {
@@ -29,7 +28,7 @@ bool sociosArchivos::guardarArchivoSocio(Socio registroSocio) {
    return response;
 }
 
-   int sociosArchivos::getCantidadRegistroSocio() {
+int sociosArchivos::getCantidadRegistroSocio() {
        int tamanioRegistroSocio = sizeof(Socio);
       FILE *punteroSocioArchivo;
       punteroSocioArchivo = fopen(_nombreArchivoSocio.c_str(), "rb");
@@ -44,8 +43,9 @@ bool sociosArchivos::guardarArchivoSocio(Socio registroSocio) {
       fclose(punteroSocioArchivo);
 
       return cantidadDeRegistros;
-   }
-   Socio sociosArchivos::LeerSocio(int pos) {
+}
+
+Socio sociosArchivos::LeerSocio(int pos) {
     FILE *punteroArchivoSocio;
     Socio registroSocio;
 
@@ -114,4 +114,21 @@ int sociosArchivos::modificarSocio(Socio registroSocio, int pos)  {
 
   return modificar;
 
+}
+
+bool sociosArchivos::buscarSocioPorId(int idBuscado, Socio& socioEncontrado) {
+    FILE* f = abrirArchivo(_nombreArchivoSocio, "rb");
+    if (f == nullptr) return false;
+
+    Socio s;
+    while (fread(&s, sizeof(Socio), 1, f) == 1) {
+        if (s.getNumeroSocio() == idBuscado) {
+            socioEncontrado = s;
+            fclose(f);
+            return true;
+        }
+    }
+
+    fclose(f);
+    return false;
 }

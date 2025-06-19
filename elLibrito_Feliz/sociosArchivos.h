@@ -14,4 +14,5 @@ class sociosArchivos {
     Socio LeerSocio(int posicion);
     int modificarSocio(Socio registroSocio, int pos);
     int buscarArchivoSocio(int numeroSocio);
+    bool buscarSocioPorId(int idBuscado, Socio& socioEncontrado);
 };

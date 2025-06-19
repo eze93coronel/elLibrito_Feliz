@@ -25,126 +25,131 @@ void libroArchivo::NuevoLibro() {
     libro l;
     autoresManager managerAutores;
 
-    std::string isbn, titulo;
+    string isbn, titulo;
     int cantidad;
 
-    // === ISBN ===
     libro libroExistente;
     do {
-        std::cout << "== ISBN ==: ";
-        std::getline(std::cin, isbn);
+        cout << "== ISBN ==: ";
+        getline(cin, isbn);
         isbn = trim(isbn);
 
         if (isbn.empty()) {
-            std::cout << "El ISBN no puede estar vacío." << std::endl;
+            cout << "El ISBN no puede estar vacío." << endl;
             continue;
         }
 
         if (existeIsbn(isbn, libroExistente)) {
-            std::cout << "YA EXISTE UN LIBRO CON ESE ISBN.\n"
-                      << "Título: " << libroExistente.getTitulo() << "\n";
-            return;  // Cancelar carga
+            cout << "YA EXISTE UN LIBRO CON ESE ISBN." << endl;
+            cout << "Título: " << libroExistente.getTitulo() << endl;
+            return;
         }
 
         if (l.setIsbn(isbn)) break;
 
-        std::cout << "ISBN inválido. Intente nuevamente.\n";
+        cout << "ISBN inválido. Intente nuevamente." << endl;
     } while (true);
 
-    // === Título ===
     do {
-        std::cout << "== TITULO (max 50 caracteres) ==: ";
-        std::getline(std::cin, titulo);
+        cout << "== TITULO (max 50 caracteres) ==: ";
+        getline(cin, titulo);
         titulo = trim(titulo);
+
         if (titulo.empty()) {
-            std::cout << "El título no puede estar vacío.\n";
+            cout << "El título no puede estar vacío." << endl;
             continue;
         }
+
         if (l.setTitulo(titulo)) break;
 
-        std::cout << "Título inválido o demasiado largo.\n";
+        cout << "Título inválido o demasiado largo." << endl;
     } while (true);
 
     // === Autor ===
-    int id_Autor = managerAutores.seleccionarOcrearAutorPorNombre();
-    if (id_Autor == 0) {
-        std::cout << "Error al seleccionar o crear el autor. Cancelando.\n";
+    int idAutor = managerAutores.seleccionarOcrearAutorPorNombre();
+    if (idAutor == 0) {
+        cout << "Error al seleccionar o crear el autor. Cancelando." << endl;
         return;
     }
-    l.setIdAutor(id_Autor);
+    l.setIdAutor(idAutor);
 
-    // === Cantidad de ejemplares ===
     do {
-        std::cout << "== CANTIDAD DE EJEMPLARES ==: ";
-        if (!(std::cin >> cantidad)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Debe ingresar un numero.\n";
+        cout << "== CANTIDAD DE EJEMPLARES ==: ";
+        if (!(cin >> cantidad)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Debe ingresar un número." << endl;
             continue;
         }
         if (cantidad > 0) {
             l.setCantidadEjemplares(cantidad);
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
         }
-        std::cout << "La cantidad debe ser mayor a cero.\n";
+        cout << "La cantidad debe ser mayor a cero." << endl;
     } while (true);
 
-    // === Fecha ===
-    std::cout << "== FECHA DE PUBLICACION ==" << std::endl;
+    cout << "== FECHA DE PUBLICACION ==" << endl;
     Fecha fecha = leerFechaValida();
     l.setFechaPublicacion(fecha);
-    std::cout << "===============================" << std::endl;
+
+    cout << "===============================" << endl;
 
     guardarRegistro(_libroArchivo, &l, sizeof(libro));
 }
-
 /// 2.  ESTA FUNCION SIRVE PARA MOSTRAR EL LIBRO EN LA POSICIÓN SELECCIONADA, A FUTURO DEBERÍA CAMBIARSE PARA QUE EN VEZ DE TOMAR LA POSICIÓN TOME EL TÍTULO, EL ISBN O EL AUTOR.
 void libroArchivo::buscarLibro() {
     int opc;
-    std::string criterio;
+    string criterio;
 
     if (!elegirCriterioBusqueda(opc, criterio)) {
         return;
     }
 
     FILE* f = abrirArchivo(_libroArchivo, "rb");
+    if (f == nullptr) {
+        cout << "No se pudo abrir el archivo de libros." << endl;
+        return;
+    }
 
     std::regex patron;
-    std::string criterioLow = toLower(criterio);
+    string criterioLow = toLower(criterio);
     if (opc == 1 || opc == 3) {
         patron = std::regex(criterioLow, std::regex_constants::icase);
     }
 
-    system("cls");
+
     mostrarEncabezadoTablaLibros();
+
 
     libro l;
     autoresManager manager;
-    bool noEncontrado = false;
+    bool encontrado = false;
 
-    while (std::fread(&l, sizeof(libro), 1, f) == 1) {
+    while (fread(&l, sizeof(libro), 1, f) == 1) {
         bool coincidencia = false;
+
         if (opc == 1) {
             coincidencia = std::regex_search(toLower(l.getTitulo()), patron);
         } else if (opc == 2) {
             coincidencia = (l.getIsbn() == criterio);
         } else if (opc == 3) {
-            std::string nombreAutor = manager.buscarNombrePorId(l.getIdAutor());
+            string nombreAutor = manager.buscarNombrePorId(l.getIdAutor());
             coincidencia = std::regex_search(toLower(nombreAutor), patron);
         }
 
         if (coincidencia) {
             mostrarLibroEnTabla(l, manager);
-            noEncontrado = true;
+            encontrado = true;
         }
     }
 
-    std::fclose(f);
+    fclose(f);
 
-    if (!noEncontrado) {
-        std::cout << "No se encontraron libros para esos criterios" << std::endl;
+    if (!encontrado) {
+        cout << "No se encontraron libros para esos criterios." << endl;
     }
+    system("pause");
 }
 
 /// 3. MODIFICAR LIBRO
@@ -153,213 +158,146 @@ void libroArchivo::modificarLibro() {
     int continuar = 2;
 
     do {
-        std::string criterio;
-        std::cout << "¿Qué libro desea modificar? Ingrese el TÍTULO o parte de él: ";
-        std::getline(std::cin, criterio);
-        std::string criterioLower = toLower(criterio);
-        std::regex patron(criterioLower, std::regex_constants::icase);
+        string criterio;
+        cout << "¿Qué libro desea modificar? Ingrese el TITULO o parte de él: ";
+        getline(cin, criterio);
 
         FILE* f = abrirArchivo(_libroArchivo, "rb+");
-        std::vector<std::pair<libro, long>> coincidencias;
-        libro l;
-        long pos = 0;
-
-        while (fread(&l, sizeof(libro), 1, f) == 1) {
-            if (std::regex_search(toLower(l.getTitulo()), patron)) {
-                coincidencias.emplace_back(l, pos);
-            }
-            ++pos;
+        if (f == nullptr) {
+            cout << "No se pudo abrir el archivo." << endl;
+            return;
         }
 
-        if (coincidencias.empty()) {
-            std::cout << "No se encontraron libros con ese criterio.\n";
+        fseek(f, 0, SEEK_END);
+        long totalRegistros = ftell(f) / sizeof(libro);
+        rewind(f);
+
+        libro* coincidencias = new libro[totalRegistros];
+        long* posiciones = new long[totalRegistros];
+        int encontrados = 0;
+        long pos = 0;
+        libro l;
+
+        std::regex patron(criterio, std::regex_constants::icase);
+
+        while (fread(&l, sizeof(libro), 1, f) == 1) {
+            if (std::regex_search(l.getTitulo(), patron)) {
+                coincidencias[encontrados] = l;
+                posiciones[encontrados] = pos;
+                encontrados++;
+            }
+            pos++;
+        }
+
+        if (encontrados == 0) {
+            cout << "No se encontraron libros con ese criterio." << endl;
             fclose(f);
+            delete[] coincidencias;
+            delete[] posiciones;
             continue;
         }
 
-        std::cout << "\n=== COINCIDENCIAS ENCONTRADAS ===\n";
+        cout << endl << "=== COINCIDENCIAS ENCONTRADAS ===" << endl;
         mostrarEncabezadoTablaLibros();
-        for (size_t i = 0; i < coincidencias.size(); ++i) {
-            std::cout << "[" << i + 1 << "] ";
-            mostrarLibroEnTabla(coincidencias[i].first, manager);
+        for (int i = 0; i < encontrados; i++) {
+            cout << "[" << i + 1 << "] ";
+            mostrarLibroEnTabla(coincidencias[i], manager);
         }
 
-        size_t seleccion;
+        int seleccion;
         do {
-            std::cout << "\nSeleccione el número del libro a modificar (1-" << coincidencias.size() << "): ";
-            std::cin >> seleccion;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        } while (seleccion < 1 || seleccion > coincidencias.size());
+            cout << endl << "Seleccione el número del libro a modificar (1-" << encontrados << "): ";
+            cin >> seleccion;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } while (seleccion < 1 || seleccion > encontrados);
 
-        libro& libroSeleccionado = coincidencias[seleccion - 1].first;
-        long indice = coincidencias[seleccion - 1].second;
+        libro& libroSeleccionado = coincidencias[seleccion - 1];
+        long indice = posiciones[seleccion - 1];
 
         do {
             int opcion;
-            std::cout << "\n¿Qué dato desea modificar?\n";
-            std::cout << "1 - ISBN\n";
-            std::cout << "2 - Título\n";
-            std::cout << "3 - Autor\n";
-            std::cout << "4 - Cantidad de ejemplares\n";
-            std::cout << "Ingrese opción: ";
-            std::cin >> opcion;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << endl << "¿Qué dato desea modificar?" << endl;
+            cout << "1 - ISBN" << endl;
+            cout << "2 - Titulo" << endl;
+            cout << "3 - Autor" << endl;
+            cout << "4 - Cantidad de ejemplares" << endl;
+            cout << "Ingrese opción: ";
+            cin >> opcion;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
             switch (opcion) {
                 case 1: {
-                    std::string nuevoIsbn;
+                    string nuevoIsbn;
                     do {
-                        std::cout << "Nuevo ISBN: ";
-                        std::getline(std::cin, nuevoIsbn);
+                        cout << "Nuevo ISBN: ";
+                        getline(cin, nuevoIsbn);
                         nuevoIsbn = trim(nuevoIsbn);
                     } while (!libroSeleccionado.setIsbn(nuevoIsbn));
                     break;
                 }
                 case 2: {
-                    std::string nuevoTitulo;
+                    string nuevoTitulo;
                     do {
-                        std::cout << "Nuevo TÍTULO: ";
-                        std::getline(std::cin, nuevoTitulo);
+                        cout << "Nuevo TITULO: ";
+                        getline(cin, nuevoTitulo);
                         nuevoTitulo = trim(nuevoTitulo);
                     } while (!libroSeleccionado.setTitulo(nuevoTitulo));
                     break;
                 }
                 case 3: {
                     int nuevoIdAutor = manager.seleccionarOcrearAutorPorNombre();
-                    libroSeleccionado.setIdAutor(nuevoIdAutor);
+                    if (nuevoIdAutor > 0) {
+                        libroSeleccionado.setIdAutor(nuevoIdAutor);
+                    }
                     break;
                 }
                 case 4: {
                     int cantidad;
                     do {
-                        std::cout << "Nueva cantidad de ejemplares (actual: " << libroSeleccionado.getCantidadEjemplares() << "): ";
-                        if (!(std::cin >> cantidad)) {
-                            std::cin.clear();
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                            std::cout << "Debe ingresar un número válido.\n";
+                        cout << "Nueva cantidad de ejemplares (actual: "
+                             << libroSeleccionado.getCantidadEjemplares() << "): ";
+                        if (!(cin >> cantidad)) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Debe ingresar un número válido." << endl;
                             continue;
                         }
                         if (cantidad >= libroSeleccionado.getlibrosPrestados()) {
                             libroSeleccionado.setCantidadEjemplares(cantidad);
-                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                             break;
                         } else {
-                            std::cout << "No puede ser menor a la cantidad de libros prestados (" << libroSeleccionado.getlibrosPrestados() << ").\n";
+                            cout << "No puede ser menor a la cantidad de libros prestados ("
+                                 << libroSeleccionado.getlibrosPrestados() << ")." << endl;
                         }
                     } while (true);
                     break;
                 }
                 default:
-                    std::cout << "Opción inválida.\n";
+                    cout << "Opción inválida." << endl;
                     break;
             }
 
-            // Volver a escribir el libro en la posición original
             fseek(f, indice * sizeof(libro), SEEK_SET);
             fwrite(&libroSeleccionado, sizeof(libro), 1, f);
             fflush(f);
 
             continuar = leerOpcionRango(0, 2,
                 "\n¿Desea seguir modificando este libro?\n"
-                " 0 = Finalizar y salir\n"
+                " 0 = Finalizar y volver al menú\n"
                 " 1 = Seguir modificando este libro\n"
                 " 2 = Modificar otro libro\n"
                 "Ingrese opción: ");
-
         } while (continuar == 1);
 
         fclose(f);
+        delete[] coincidencias;
+        delete[] posiciones;
+
     } while (continuar == 2);
 }
 
-/// 4. PRESTAR LIBROS
-void libroArchivo::prestarLibro(){
-    int opc = 0;
-    std::string criterio;
-    if (!elegirCriterioBusqueda(opc, criterio)) {
-        return;
-    }
-    FILE* f = abrirArchivo(_libroArchivo, "rb");
-
-    std::vector<std::pair<libro, long>> matches;
-    libro l;
-    long pos = 0;
-    std::regex patron;
-    std::string criterioLow = toLower(criterio);
-    if (opc == 1) {
-        patron = std::regex(criterioLow, std::regex_constants::icase);
-    }
-
-    while (std::fread(&l, sizeof(libro), 1, f) == 1) {
-        bool coincide = (opc == 1)
-            ? std::regex_search(toLower(l.getTitulo()), patron)  ///if
-            : (l.getIsbn() == criterio); ///else
-        if (coincide) {
-            matches.emplace_back(l, pos);
-        }
-        ++pos;
-    }
-    fclose(f);
-
-    if (matches.empty()) {
-        std::cout << "No se encontraron libros para \"" << criterio << "\".\n";
-        return;
-    }
-
-    // Mostrar menú solo con las coincidencias
-    std::cout << "Libros encontrados: " << std::endl;
-    mostrarEncabezadoTablaLibros();
-    autoresManager manager;
-
-    for (size_t i = 0; i < matches.size(); ++i) {
-        std::cout << "[" << (i + 1) << "] ";
-        mostrarLibroEnTabla(matches[i].first, manager);
-    }
-    size_t sel = 0;     // Leer selección válida
-    do {
-        std::cout << "Seleccione un numero (1-" << matches.size() << "): ";
-        std::cin >> sel;
-    } while (sel < 1 || sel > matches.size());
-
-    // Datos del socio // esta parte todavía no modifica el archivo de socios ni de prestamos solo pide los datos.
-    std::string nombreSocio;
-    int idSocio;
-    std::cin.ignore();
-    std::cout << "Nombre del socio: ";
-    std::getline(std::cin, nombreSocio);
-    std::cout << "ID del socio: ";
-    std::cin >> idSocio;
-
-    // 2ª pasada: reabrir en lectura/escritura y actualizar ese registro
-    long index = matches[sel-1].second;
-    f = abrirArchivo(_libroArchivo, "rb+");
-
-    std::fseek(f, index * sizeof(libro), SEEK_SET); // Movernos al registro exacto
-    std::fread(&l, sizeof(libro), 1, f); // Leer la última versión
-
-    // Control de stock
-    int nuevosPrestados = l.getlibrosPrestados() + 1;
-    if (nuevosPrestados > l.getCantidadEjemplares()) {
-        std::cout << "No quedan ejemplares disponibles para prestar.\n";
-        std::fclose(f);
-        return;
-    }
-    l.setlibrosPrestados(nuevosPrestados);
-
-    // Volver atrás y escribir
-    std::fseek(f, -static_cast<long>(sizeof(libro)), SEEK_CUR);
-    std::fwrite(&l, sizeof(libro), 1, f);
-    std::fflush(f);
-    std::fclose(f);
-
-    // Confirmación final
-    std::cout << "\nPrestamo registrado con exito:\n"
-              << " Titulo: " << l.getTitulo() << "\n"
-              << " Total prestados de ese título: " << l.getlibrosPrestados() << "\n"
-              << " Socio: " << nombreSocio
-              << " (ID " << idSocio << ")\n";
-}
-
+/// Este metodo se comunica con Prestamos Manager para registrar los libros prestados en el archivo libros.dat
 bool libroArchivo::registrarPrestamoLibro(int posRegistro) {
     FILE* f = abrirArchivo(_libroArchivo, "rb+");
     if (!f) return false;
@@ -379,11 +317,6 @@ bool libroArchivo::registrarPrestamoLibro(int posRegistro) {
     std::fwrite(&l, sizeof(libro), 1, f);
     fclose(f);
     return true;
-}
-
-/// 5. DEVOLVER LIBRO: esto debe contemplar primero al socio, qué libros tiene en su haber y seleccionar el que quiere devolver.
-void libroArchivo::devolverLibro() {
-    cout << "Aca va una funcion" << endl;
 }
 
 ///6. STOCK DE LIBROS
@@ -409,48 +342,44 @@ void libroArchivo::listarLibros() {
 }
 
 ///########### AUXILIARES #########////
-bool libroArchivo::elegirCriterioBusqueda(int& opc, std::string& criterio) {
+bool libroArchivo::elegirCriterioBusqueda(int& opc, string& criterio) {
     do {
-        std::cout << "1) Buscar por TITULO" << std::endl;
-        std::cout << "2) Buscar por ISBN" << std::endl;
-        std::cout << "3) Buscar por AUTOR" << std::endl;
-        std::cout << "4) Volver al menu anterior" << std::endl;
-        std::cout << std::endl;
-        std::cout << "Elija opcion: ";
+        cout << "1) Buscar por TITULO" << endl;
+        cout << "2) Buscar por ISBN" << endl;
+        cout << "3) Buscar por AUTOR" << endl;
+        cout << "4) Volver al menu anterior" << endl;
+        cout << endl;
+        cout << "Elija opcion: ";
 
-        if (!(std::cin >> opc)) {
-            std::cout << std::endl;
-            std::cout << "Por favor ingrese una opcion valida." << std::endl;
-            std::cout << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (!(cin >> opc)) {
+            cout << endl << "Por favor ingrese una opcion valida." << endl << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         if (opc < 1 || opc > 4) {
-            std::cout << "Opcion invalida. Debe ser 1, 2, 3 o 4." << std::endl;
+            cout << "Opcion invalida. Debe ser 1, 2, 3 o 4." << endl;
             continue;
         }
 
         switch (opc) {
             case 1:
-                std::cout << "Ingrese el TITULO o parte de el: ";
-                std::getline(std::cin, criterio);
+                cout << "Ingrese el TITULO o parte de el: ";
+                getline(cin, criterio);
                 return true;
             case 2:
-                std::cout << "Ingrese el ISBN completo: ";
-                std::getline(std::cin, criterio);
+                cout << "Ingrese el ISBN completo: ";
+                getline(cin, criterio);
                 return true;
             case 3:
-                std::cout << "Ingrese el nombre (o parte) del AUTOR: ";
-                std::getline(std::cin, criterio);
+                cout << "Ingrese el nombre (o parte) del AUTOR: ";
+                getline(cin, criterio);
                 return true;
             case 4:
                 return false;
-            default:
-                std::cout << "Opcion invalida. Intente de nuevo.";
-                break;
         }
     } while (true);
 }
@@ -458,38 +387,38 @@ bool libroArchivo::elegirCriterioBusqueda(int& opc, std::string& criterio) {
 /// Lee un libro de la posición indicada
 libro libroArchivo::LeerLibro(int pos) {
     libro l;
+
     if (!leerRegistroBinario(&l, sizeof(libro), pos, _libroArchivo)) {
-        std::cout << "Error al leer libro en posición " << pos << std::endl;
+        cout << "Error al leer libro en posicion " << pos << endl;
     }
     return l;
 }
 
 void libroArchivo::mostrarEncabezadoTablaLibros() {
     system("cls");
-    std::cout << left
-         << std::setw(15) << "ISBN"
-         << std::setw(50) << "Titulo"
-         << std::setw(30) << "Autor"
-         << std::setw(18) << "F. Publicacion"
-         << std::setw(15) << "Stock actual"
-         << setw(15) << "Prestados"
-         << setw(15) << "Stock total"
-         << std::endl;
-    std::cout << setfill('-') << std::setw(143) << "-" << setfill(' ') << std::endl;
+    cout << left
+         << setw(15) << "ISBN"
+         << setw(35) << "TITULO"
+         << setw(25) << "AUTOR"
+         << setw(18) << "F. PUBLICACION"
+         << setw(15) << "STOCK ACTUAL"
+         << setw(12) << "PRESTADOS"
+         << endl;
+    cout << setfill('-') << setw(110) << "-" << setfill(' ') << endl;
 }
 
 void libroArchivo::mostrarLibroEnTabla(libro& l, autoresManager& manager) {
     Fecha f = l.getFechaPublicacion();
-    std::string fechaStr = to_string(f.getDia()) + "/" + to_string(f.getMes()) + "/" + to_string(f.getAnio());
-    std::cout << left
-         << std::setw(15) << l.getIsbn()
-         << std::setw(50) << l.getTitulo().substr(0, 50)
-         << std::setw(30) << manager.buscarNombrePorId(l.getIdAutor())
-         << std::setw(22) << fechaStr
-         << std::setw(15) << (l.getCantidadEjemplares() - l.getlibrosPrestados())
-         << setw(15) << l.getlibrosPrestados()
-         << std::setw(15) << l.getCantidadEjemplares()
-         << std::endl;
+    string fechaStr = to_string(f.getDia()) + "/" + to_string(f.getMes()) + "/" + to_string(f.getAnio());
+    cout << left
+         << setw(15) << l.getIsbn()
+         << setw(38) << l.getTitulo().substr(0, 35)
+         << setw(25) << manager.buscarNombrePorId(l.getIdAutor()).substr(0, 20)
+         << setw(20) << fechaStr
+         << setw(12) << (l.getCantidadEjemplares() - l.getlibrosPrestados())
+         << setw(12) << l.getlibrosPrestados()
+         << endl;
+
 }
 
 ///Estoy casi segura que esta función se debería hacer reutilizable .. porque se podría buscar ID de Socio o de prestamo..

@@ -5,7 +5,6 @@
 #include "menuLibro.h"
 #include "menuPrestamos.h"
 #include "libroArchivo.h"
-#include "menuReportes.h"
 #include <windows.h>
 
 using namespace std;
@@ -17,11 +16,9 @@ int main()
     menuLibro menuLibro;
     libroArchivo archivoLibros;
     menuPrestamos mP;
-    MenuReportes mR;
 
     int opc;
-    while(true)
-    {
+    while(true){
         system("cls");
         cout << "****** BIBLIOTECA EL LIBRITO FELIZ ******" << endl;
         cout << "1. MENU SOCIOS " << endl;
@@ -29,33 +26,31 @@ int main()
         cout << "3. PRESTAMOS  " << endl;
         cout << "4. MENU REPORTES " << endl;
         cout << "5. SALIR  " << endl;
-        cout << "************************" << endl;
+        cout << "*****************************************" << endl;
         cout << "SELECCIONAR OPCION: ";
         cin>>opc;
         system("cls");
-        switch(opc)
-        {
-        case 1:
-            menu.mostrarMenuPrincipal();
-            break;
-        case 2:
-            menuLibro.mostrarMenuLibro();
-            break;
-        case 3:
-            mP.mostrarMenuPrestamos();
-            break;
-        case 4:
-            mR.mostrarMenuReportes();
-            break;
-        case 5:
-            std::cout << "==================================================" << std::endl;
-            std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
-            std::cout << "==================================================" << std::endl;
-            std::exit(0);
-            break;
+        switch(opc){
+            case 1: menu.mostrarMenuPrincipal();
+                    break;
+            case 2:
+                   menuLibro.mostrarMenuLibro();
+                    break;
+            case 3:
+                mP.mostrarMenuPrestamos();
+                    break;
+            case 4:
+                cout << "Acá va el menú de reportes, pero aún no se desarrolló" << endl;
+                system("pause");
+                    break;
+            case 5:
+                std::cout << "==================================================" << std::endl;
+                std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
+                std::cout << "==================================================" << std::endl;
+                std::exit(0);
+                break;
 
-        default:
-            cout<<"LA SELECCION NO ES CORRECTA"<<endl;
+            default: cout<<"LA SELECCION NO ES CORRECTA"<<endl;
 
         }
         system("pause");

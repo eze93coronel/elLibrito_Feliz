@@ -37,17 +37,18 @@
 		<Unit filename="Socio.cpp" />
 		<Unit filename="Socio.h" />
 		<Unit filename="autores.cpp" />
-		<Unit filename="autores.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="autores.h" />
 		<Unit filename="autoresManager.cpp" />
-		<Unit filename="autoresManager.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="autoresManager.h" />
+		<Unit filename="cuotas.cpp" />
+		<Unit filename="cuotas.h" />
+		<Unit filename="cuotasManager.cpp" />
+		<Unit filename="cuotasManager.h" />
+		<Unit filename="elLibrito_Feliz.cbp" />
+		<Unit filename="elLibrito_Feliz.depend" />
+		<Unit filename="elLibrito_Feliz.layout" />
 		<Unit filename="funcionesAuxiliares.cpp" />
-		<Unit filename="funcionesAuxiliares.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="funcionesAuxiliares.h" />
 		<Unit filename="libro.cpp" />
 		<Unit filename="libro.h" />
 		<Unit filename="libroArchivo.cpp" />
@@ -61,6 +62,8 @@
 		<Unit filename="menuPrestamos.h" />
 		<Unit filename="menuReportes.cpp" />
 		<Unit filename="menuReportes.h" />
+		<Unit filename="menuSocio.cpp" />
+		<Unit filename="menuSocio.h" />
 		<Unit filename="prestamos.cpp" />
 		<Unit filename="prestamos.h" />
 		<Unit filename="prestamosManager.cpp" />
@@ -69,6 +72,7 @@
 		<Unit filename="reportes.h" />
 		<Unit filename="socioManager.cpp" />
 		<Unit filename="socioManager.h" />
+		<Unit filename="socios.dat" />
 		<Unit filename="sociosArchivos.cpp" />
 		<Unit filename="sociosArchivos.h" />
 		<Extensions>

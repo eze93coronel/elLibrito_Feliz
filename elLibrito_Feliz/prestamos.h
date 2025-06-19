@@ -37,6 +37,8 @@ public:
     std::string mostrarPrestamoPantalla();
     void getFechaPrestamoStr();
     void getFechaDevolucionStr();
+    int contarPrestamosPorSocio(int idSocio);
+
 };
 
 #endif // PRESTAMOS_H
