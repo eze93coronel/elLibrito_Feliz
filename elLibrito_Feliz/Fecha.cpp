@@ -69,6 +69,7 @@ void Fecha::mostrarFecha(){
 }
 
 std::string Fecha::toString(){
-    return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio) ;}
+    return std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio);
+    }
 
 
