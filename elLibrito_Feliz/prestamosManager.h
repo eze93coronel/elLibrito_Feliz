@@ -19,6 +19,8 @@ public:
     int siguienteIdPrestamo();
 
     bool esFechaPasada(Fecha& f);
+    int contarPrestamosActivosPorSocio(int idSocio);
+
 
 
 

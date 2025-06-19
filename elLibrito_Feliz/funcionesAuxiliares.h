@@ -16,6 +16,7 @@ std::string toLower(const std::string& s);
 Fecha leerFechaValida();
 bool esAnioBisiesto(int anio);
 int diasEnMes(int mes, int anio);
+bool esMayorFecha(const Fecha& a, const Fecha& b);
 int leerOpcionRango(int minimo, int maximo, const std::string& mensaje);
 
 int compararFechas(Fecha& a, Fecha& b);

@@ -1,6 +1,7 @@
 #include "Prestamos.h"
 #include <iostream>
 #include <cstring>
+#include "funcionesAuxiliares.h"
 using namespace std;
 
 Prestamos::Prestamos() {
@@ -124,4 +125,20 @@ bool Prestamos::getDevuelto() {
 }
 
 
+int Prestamos::contarPrestamosPorSocio(int idSocio) {
+    FILE* f = abrirArchivo("archivos/prestamos.dat", "rb");
+    if (f == nullptr) return 0;
+
+    Prestamos p;
+    int contador = 0;
+
+    while (fread(&p, sizeof(Prestamos), 1, f) == 1) {
+        if (p.getIdSocio() == idSocio && !p.getDevuelto()) {
+            contador++;
+        }
+    }
+
+    fclose(f);
+    return contador;
+}
 

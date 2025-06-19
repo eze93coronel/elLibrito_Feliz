@@ -5,9 +5,8 @@
 #include "funcionesAuxiliares.h"
 #include "prestamosManager.h"
 #include "prestamos.h"
-
-
-///REVISAR PORQUE NO HACE BIEN LA DEVOLUCIÓN DE LIBROS. NO RESTA NI SUMA DE LA MANERA CORRECTA EN EL ARCHIVO DE LIRBOS.DAT
+#include "sociosArchivos.h"
+#include "Socio.h"
 using namespace std;
 
 prestamosManager::prestamosManager() {
@@ -18,28 +17,28 @@ prestamosManager::prestamosManager(string prestamosArchivo) {
     this -> _prestamosArchivo = prestamosArchivo;
 }
 
-int prestamosManager::siguienteIdPrestamo() {
-    FILE* f = abrirArchivo(_prestamosArchivo, "rb");
-    Prestamos p;
-    int maxId = 0;
-
-    while (fread(&p, sizeof(Prestamos), 1, f) == 1) {
-        if (p.getIdPrestamo() > maxId) {
-            maxId = p.getIdPrestamo();
-        }
-    }
-
-    fclose(f);
-    return maxId + 1;
-}
-
 void prestamosManager::registrarPrestamo(libroArchivo& archivoLibros) {
-    string nombreSocio;
     int idSocio;
-    cout << "Nombre del socio: ";
-    getline(cin, nombreSocio);
-    cout << "ID del socio: ";
+    cout << "Ingrese el ID del socio: ";
     cin >> idSocio;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    sociosArchivos archivoSocios;
+    Socio socioBuscado;
+    if (!archivoSocios.buscarSocioPorId(idSocio, socioBuscado)) {
+        cout << "No existe un socio con ese ID. Debe ingresar un ID válido." << endl;
+        return;
+    }
+    cout << "----------------------------------" << endl;
+    cout << "SOCIO ENCONTRADO:" << endl;
+    cout << "----------------------------------" << endl;
+    socioBuscado.mostrarSocioPantalla();
+    int librosEnPrestamo = contarPrestamosActivosPorSocio(idSocio);
+    cout << "----------------------------------" << endl;
+    cout << "Libros actualmente en préstamo: " << librosEnPrestamo << endl;
+    cout << "----------------------------------" << endl;
+
+    cout << endl;
 
     libro libroSeleccionado;
     long posicionLibro;
@@ -51,52 +50,65 @@ void prestamosManager::registrarPrestamo(libroArchivo& archivoLibros) {
         if (!archivoLibros.elegirCriterioBusqueda(opcion, criterio)) return;
 
         FILE* archivo = abrirArchivo(archivoLibros.getRutaArchivo(), "rb");
-        if (!archivo) return;
+        if (archivo == nullptr) return;
 
-        vector<libro> librosCoincidentes;
-        vector<long> posiciones;
-        libro l;
+        fseek(archivo, 0, SEEK_END);
+        long totalRegistros = ftell(archivo) / sizeof(libro);
+        rewind(archivo);
+
+        libro* coincidencias = new libro[totalRegistros];
+        long* posiciones = new long[totalRegistros];
+        int encontrados = 0;
         long pos = 0;
-        string criterioLower = toLower(criterio);
+        libro l;
+
+        std::regex patron(criterio, std::regex_constants::icase);
 
         while (fread(&l, sizeof(libro), 1, archivo) == 1) {
             bool coincide = false;
-            if (opcion == 1 && toLower(l.getTitulo()).find(criterioLower) != string::npos) coincide = true;
+            if (opcion == 1 && std::regex_search(l.getTitulo(), patron)) coincide = true;
             if (opcion == 2 && l.getIsbn() == criterio) coincide = true;
             if (opcion == 3) {
                 autoresManager manager;
                 string autor = manager.buscarNombrePorId(l.getIdAutor());
-                if (toLower(autor).find(criterioLower) != string::npos) coincide = true;
+                if (std::regex_search(autor, patron)) coincide = true;
             }
 
             if (coincide) {
-                librosCoincidentes.push_back(l);
-                posiciones.push_back(pos);
+                coincidencias[encontrados] = l;
+                posiciones[encontrados] = pos;
+                encontrados++;
             }
-            ++pos;
+            pos++;
         }
         fclose(archivo);
 
-        if (librosCoincidentes.empty()) {
+        if (encontrados == 0) {
             cout << "No se encontraron libros." << endl;
+            delete[] coincidencias;
+            delete[] posiciones;
             return;
         }
 
         archivoLibros.mostrarEncabezadoTablaLibros();
         autoresManager manager;
-        for (size_t i = 0; i < librosCoincidentes.size(); ++i) {
+        for (int i = 0; i < encontrados; i++) {
             cout << "[" << (i + 1) << "] ";
-            archivoLibros.mostrarLibroEnTabla(librosCoincidentes[i], manager);
+            archivoLibros.mostrarLibroEnTabla(coincidencias[i], manager);
         }
 
-        size_t seleccion = 0;
+        int seleccion = 0;
         do {
-            cout << "Seleccione el libro a prestar (1-" << librosCoincidentes.size() << "): ";
+            cout << "Seleccione el libro a prestar (1-" << encontrados << "): ";
             cin >> seleccion;
-        } while (seleccion < 1 || seleccion > librosCoincidentes.size());
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } while (seleccion < 1 || seleccion > encontrados);
 
         posicionLibro = posiciones[seleccion - 1];
-        libroSeleccionado = librosCoincidentes[seleccion - 1];
+        libroSeleccionado = coincidencias[seleccion - 1];
+
+        delete[] coincidencias;
+        delete[] posiciones;
 
         int stockDisponible = libroSeleccionado.getCantidadEjemplares() - libroSeleccionado.getlibrosPrestados();
         if (stockDisponible <= 0) {
@@ -104,39 +116,35 @@ void prestamosManager::registrarPrestamo(libroArchivo& archivoLibros) {
             cout << "No hay stock disponible para este libro." << endl;
             cout << "¿Desea buscar otro libro?" << endl;
             cout << "1) Sí" << endl;
-            cout << "2) Cancelar" << endl;
-            int opcion = leerOpcionRango(1, 2, "Seleccione: ");
+            cout << "2) No" << endl;
+            int confirmar = leerOpcionRango(1, 2, "Seleccione: ");
             if (opcion == 2) return;
         }
         else {
             libroValido = true;
         }
-
     }
-
-    cout << "===============================" << endl;
-    cout << "FECHA DE PRÉSTAMO" << endl;
-    cout << "===============================" << endl;
     Fecha fechaPrestamo = fechaActual();
-    cout << "Fecha préstamo: " << fechaPrestamo.getDia() << "/" << fechaPrestamo.getMes() << "/" << fechaPrestamo.getAnio() << endl;
     Fecha fechaDevolucion = sumar15DiasAFechaPrestamo(fechaPrestamo);
 
     cout << "===============================" << endl;
     cout << "Resumen del préstamo" << endl;
     cout << "===============================" << endl;
-    cout << "Socio: " << nombreSocio << " (ID " << idSocio << ")" << endl;
+    cout << "Socio: " << socioBuscado.getNombre() << " " << socioBuscado.getApellido()
+         << " (ID " << idSocio << ")" << endl;
     cout << "Libro: " << libroSeleccionado.getTitulo() << " (ISBN " << libroSeleccionado.getIsbn() << ")" << endl;
     cout << "Fecha préstamo: " << fechaPrestamo.getDia() << "/" << fechaPrestamo.getMes() << "/" << fechaPrestamo.getAnio() << endl;
     cout << "Fecha devolución: " << fechaDevolucion.getDia() << "/" << fechaDevolucion.getMes() << "/" << fechaDevolucion.getAnio() << endl;
 
-    cout << "¿Desea confirmar el préstamo?" << endl;
+    cout << "----------------------------------" << endl;
+    cout << "¿Desea confirmar el prestamos? " << endl;
     cout << "1) Sí" << endl;
     cout << "2) No" << endl;
     int confirmar = leerOpcionRango(1, 2, "Seleccione: ");
     if (confirmar != 1) {
         cout << "Préstamo cancelado." << endl;
         return;
-}
+    }
 
     if (!archivoLibros.registrarPrestamoLibro(posicionLibro)) {
         cout << "Error inesperado al actualizar el stock del libro." << endl;
@@ -144,13 +152,12 @@ void prestamosManager::registrarPrestamo(libroArchivo& archivoLibros) {
     }
 
     Prestamos p;
-    p.setIdPrestamo(siguienteIdPrestamo());
+    p.setIdPrestamo(contarRegistros("archivos/prestamos.dat", sizeof(p)) + 1);
     p.setIdSocio(idSocio);
     p.setISBN(libroSeleccionado.getIsbn());
     p.setFechaPrestamo(fechaPrestamo);
     p.setFechaDevolucion(fechaDevolucion);
     p.setDevuelto(false);
-
 
     guardarRegistro(_prestamosArchivo, &p, sizeof(Prestamos));
     cout << "Préstamo registrado correctamente." << endl;
@@ -254,7 +261,6 @@ void prestamosManager::registrarDevolucion(libroArchivo& archivoLibros) {
     fclose(archivo);
 }
 
-
 Fecha prestamosManager::sumar15DiasAFechaPrestamo(Fecha& f) {
     Fecha nuevaFecha;
     int dia = f.getDia();
@@ -293,3 +299,37 @@ bool prestamosManager::esFechaPasada(Fecha& f) {
 
     return false;
 }
+
+int prestamosManager::contarPrestamosActivosPorSocio(int idSocio) {
+    FILE* f = abrirArchivo(_prestamosArchivo, "rb");
+    if (f == nullptr) return 0;
+
+    Prestamos p;
+    int contador = 0;
+
+    while (fread(&p, sizeof(Prestamos), 1, f) == 1) {
+        if (p.getIdSocio() == idSocio && !p.getDevuelto()) {
+            contador++;
+        }
+    }
+
+    fclose(f);
+    return contador;
+}
+
+///
+/*int prestamosManager::siguienteIdPrestamo() {
+    FILE* f = abrirArchivo(_prestamosArchivo, "rb");
+    Prestamos p;
+    int maxId = 0;
+
+    while (fread(&p, sizeof(Prestamos), 1, f) == 1) {
+        if (p.getIdPrestamo() > maxId) {
+            maxId = p.getIdPrestamo();
+        }
+    }
+
+    fclose(f);
+    return maxId + 1;
+}
+*/

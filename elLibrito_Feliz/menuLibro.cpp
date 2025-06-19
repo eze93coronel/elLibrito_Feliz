@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "menuLibro.h"
 #include "libroArchivo.h"
 #include "autoresManager.h"
@@ -11,81 +12,63 @@ void menuLibro::mostrarMenuLibro() {
 
 
     do {
-    cout << "---------------------------------------" << endl;
-
-    cout << " SUB MENU: LIBROS  " << endl;
-    cout << "1. Alta libro " << endl;
-    cout << "2. Buscar un libro " << endl;
-    cout << "3. Modificar libro "  << endl;
-    cout << "4. Prestar libro "  << endl;
-    cout << "5. Devolver libro "  << endl;
-    cout << "6. Volver al menu anterior "  << endl;
-    cout << "7. Salir "  << endl;
-
-
-    cout << "---------------------------------------" << endl;
-
-    cout <<"ingrese una opcion: ";
-         cin >> opcion;
-         cin.ignore();
-         system("cls");
+    cout << "****** BIBLIOTECA EL LIBRITO FELIZ ******" << endl;
+    cout << "-----------------------------------------" << endl;
+    cout << "   SUB MENU: LIBROS  " << endl;
+    cout << "           1. ALTA DE LIBROS" << endl;
+    cout << "           2. BUSCAR LIBROS " << endl;
+    cout << "           3. MODIFICAR LIBROS "  << endl;
+    cout << "           4. VOLVER AL MENU ANTERIOR "  << endl;
+    cout << "           5. SALIR DEL PROGRAMA "  << endl;
+    cout << "-----------------------------------------" << endl;
+    cout <<"INGRESE UNA OPCIÓN: ";
+    cin >> opcion;
+    cout << endl;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    system("cls");
 
     switch(opcion){
        case 1 :
-            std::cout << "===============================" << std::endl;
-            std::cout << "         ALTA DE LIBROS" << std::endl;
-            std::cout << "===============================" << std::endl;
-            std::cout << std::endl;
-            cout << "Ingrese los datos del nuevo libro: " << endl << endl;
+            cout << "===============================" << endl;
+            cout << "         ALTA DE LIBROS" << endl;
+            cout << "===============================" << endl;
+            cout << endl;
+            cout << "INGRESE LOS DATOS DEL NUEVO LIBRO: " << endl << endl;
             aLibro.NuevoLibro();
             system("pause");
+            system("cls");
         break;
 
        case 2 :
-            std::cout << "===============================" << std::endl;
-            std::cout << "       BUSQUEDA DE LIBROS"  << std::endl;
-            std::cout << "===============================" << std::endl;
-            std::cout << std::endl;
+            cout << "===============================" << endl;
+            cout << "       BUSQUEDA DE LIBROS"  << endl;
+            cout << "===============================" << endl;
+            cout << endl;
             cout << "INGRESE EL CRITERIO POR EL QUE QUIERE BUSCAR EL LIBRO: " << endl << endl;
             aLibro.buscarLibro();
-            system("pause");
+            system("cls");
        break;
 
        case 3 :
-            std::cout << "===============================" << std::endl;
-            std::cout << "MODIFICAR LIBRO" << std::endl;
-            std::cout << "==============================="<< std::endl;
+            cout << "===============================" << endl;
+            cout << "MODIFICAR LIBRO" << endl;
+            cout << "==============================="<< endl;
            aLibro.modificarLibro();
            system("pause");
+           system("cls");
         break;
 
        case 4 :
-            std::cout << "===============================" << std::endl;
-            std::cout << "PRESTAMOS DE LIBROS" << std::endl;
-            std::cout << "==============================="<< std::endl;
-            aLibro.prestarLibro();
-            system("pause");
-
-        break;
-       case 5:
-            std::cout << "===============================" << std::endl;
-            std::cout << "DEVOLVER LIBRO" << std::endl;
-            std::cout << "==============================="<< std::endl;
-            aLibro.devolverLibro();
-            system("pause");
-        break;
-
-       case 6:
            return;
-       case 7:
-        std::cout << "==================================================" << std::endl;
-        std::cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << std::endl;
-        std::cout << "==================================================" << std::endl;
-        std::exit(0);
+       case 5:
+        cout << "==================================================" << endl;
+        cout << "USTED A DECIDIDO CERRAR EL PROGRAMA. ¡HASTA LUEGO!" << endl;
+        cout << "==================================================" << endl;
+        exit(0);
         break;
     }
     system("cls");
-  } while(opcion!=7);
+  } while(opcion!=5);
 
 
 }
